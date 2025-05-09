@@ -75,7 +75,7 @@ export function SignupForm() {
 
   const handleVerification = async () => {
     const values = {
-      phone: verifyInfo.email,
+      email: verifyInfo.email,
       otp: verifyInfo.otp,
     };
     setError("");
@@ -176,7 +176,7 @@ export function SignupForm() {
           <Button
             onClick={handleVerification}
             className="w-full"
-            variant={"auth"}
+            variant={"default"}
           >
             Verify Otp
           </Button>

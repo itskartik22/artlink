@@ -53,7 +53,7 @@ const MobileNav = ({ loggedInStatus }: { loggedInStatus: boolean }) => {
                   <Link href="/cart">Cart</Link>
                 </div>
                 <Button>
-                  <Link href="/auth/login">Login</Link>
+                  <Link href="/login">Login</Link>
                 </Button>
               </div>
             )}

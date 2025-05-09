@@ -2,8 +2,7 @@ import type { NextAuthConfig } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import Google from "next-auth/providers/google";
 import { getUserByEmail } from "./lib/getUserByEmail";
-import { getUserByPhone } from "./lib/getUserByPhone";
-import { getUserByPhoneAndOtp } from "./lib/getUserByPhoneAndOtp";
+import { getUserByEmailAndOtp } from "./lib/getUserByEmailAndOtp";
 
 export default {
   providers: [
@@ -15,22 +14,22 @@ export default {
       name: "Credentials",
       id: "credentials",
       credentials: {
-        phone: { label: "Email", type: "text" },
+        email: { label: "Email", type: "text" },
         password: { label: "Password", type: "password" },
         // otp: { label: "OTP", type: "text" },
       },
       authorize: async (credentials) => {
         try {
-          const { phone, password, otp } = credentials as { phone: string; password: string, otp: string };
-        //   if (phone && otp) {
-        //     const user = await getUserByPhoneAndOtp(phone, otp);
-        //     if (user) {
-        //       return user;
-        //     } else {
-        //       return null;
-        //     }
-        //   }
-          const user = await getUserByEmail(phone, password);
+          const { email, password, otp } = credentials as { email: string; password: string, otp: string };
+          if (email && otp) {
+            const user = await getUserByEmailAndOtp(email, otp);
+            if (user) {
+              return user;
+            } else {
+              return null;
+            }
+          }
+          const user = await getUserByEmail(email, password);
           console.log("user", user);
           if (user) {
             return user;

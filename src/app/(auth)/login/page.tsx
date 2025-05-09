@@ -19,7 +19,7 @@ export default async function Page() {
   // console.log("session", session);
   return (
     <div className="relative w-[400px] h-full flex flex-col justify-center gap-2">
-      <div className="p-4 flex flex-col justify-center gap-2">
+      <div className="p-4 flex flex-col justify-center gap-4">
         <h1 className="text-xl font-medium">Log in to your Account</h1>
         <LoginForm />
         <div className="mt-1">
@@ -52,7 +52,7 @@ export default async function Page() {
 
       </div>
       <div className="mt-2 absolute bottom-0 text-sm text-center right-0 left-0">
-        &copy; 2024 Mitmaai.org - All Rights Reserved
+        &copy; 2025 Artlink - All Rights Reserved
       </div>
     </div>
   );

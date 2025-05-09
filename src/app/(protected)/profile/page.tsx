@@ -8,21 +8,23 @@ import { useEffect } from "react";
 
 export default function Profile() {
   //   const user = useCurrentUser();
-  const { session } = useSessionContext();
+  const user = useCurrentUser();
   const router = useRouter();
 
-  useEffect(() => {
-    if (!session.isAuthenticated) {
-      router.push("/auth/login");
-    }
-    if (session.user && !session.user.userType) {
-      router.push("/user/profile-type");
-    }
-  });
+  // useEffect(() => {
+  //   if (!session.isAuthenticated) {
+  //     router.push("/auth/login");
+  //   }
+  //   if (session.user && !session.user.userType) {
+  //     router.push("/user/profile-type");
+  //   }
+  // });
+  console.log(user)
 
   return (
     <div className="w-[100%]">
-      <h1>Profile</h1>
+      {}
+      {/* <h1>Profile</h1>
       <p className="flex">
         Name: {JSON.stringify(session.user?.name)}{" "}
         <span className="flex">
@@ -31,7 +33,7 @@ export default function Profile() {
       </p>
       <p className="flex">email: {JSON.stringify(session.user?.email)}</p>
       <p className="flex">userType: {JSON.stringify(session.user?.userType)}</p>
-      <LogoutButton />
+      <LogoutButton /> */}
     </div>
   );
 }

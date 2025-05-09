@@ -34,7 +34,6 @@ export default function LoginForm() {
   });
 
   const pathname = usePathname();
-  // console.log();
   if (pathname !== "/login") {
     router.push("/login");
   }
@@ -99,12 +98,9 @@ export default function LoginForm() {
           </div>
           <FormSuccess message={success} />
           <FormError message={error} />
-          <Button type="submit" className="w-full" variant="auth">
+          <Button type="submit" className="w-full" variant={"default"}>
             Login
           </Button>
-          {/* <button onClick={sendOtp}>
-          Send otp
-        </button> */}
         </form>
       </Form>
       

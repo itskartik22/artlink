@@ -41,7 +41,7 @@ export default function page() {
         </form>
       </div>
       <div className="mt-2 absolute bottom-0 text-sm text-center right-0 left-0">
-        &copy; 2024 Mitmaai.org - All Rights Reserved
+        &copy; 2025 Artlink - All Rights Reserved
       </div>
     </div>
   );

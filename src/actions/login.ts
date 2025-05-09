@@ -35,16 +35,16 @@ export async function login(formData: z.infer<typeof LoginSchema>) {
     }
   }
 }
-export async function otpLogin(values: { phone: string; otp: string }) {
-  const { phone, otp } = values;
-  if (!phone || !otp) {
+export async function otpLogin(values: { email: string; otp: string }) {
+  const { email, otp } = values;
+  if (!email || !otp) {
     return { error: "Something went wrong!." };
   }
 
-  console.log("phone", phone, otp);
+  console.log("phone", email, otp);
   try {
     const response = await signIn("credentials", {
-      phone,
+      email,
       otp,
       // redirectTo: DEFAULT_LOGIN_REDIRECT
       redirect: false,

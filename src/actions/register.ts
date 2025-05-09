@@ -1,6 +1,6 @@
 "use server";
 import { signIn } from "@/auth";
-// import { sendOTP } from "@/lib/aws-sns";
+import { sendOTP } from "@/lib/mail";
 import { prisma } from "@/lib/db";
 import { RegisterSchema } from "@/lib/definitions";
 import bcrypt from "bcrypt";
@@ -49,7 +49,7 @@ export async function register(formData: z.infer<typeof RegisterSchema>) {
       return { error: "Error creating account." };
     }
 
-    // await sendOTP(phone, otp);
+    await sendOTP(email, otp);
     return {
       success: "Otp sent on your mobile number.",
     };
