@@ -6,6 +6,7 @@ import Link from "next/link";
 import { auth, signIn } from "@/auth";
 import { useRouter } from "next/navigation";
 import { NextResponse } from "next/server";
+import { redirect } from "next/navigation";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -13,7 +14,8 @@ export default async function Page() {
   const session = await auth();
 
   if (session) {
-    return NextResponse.redirect("/profile");
+    redirect("/profile");
+    // return NextResponse.redirect("/profile");
   }
 
   // console.log("session", session);

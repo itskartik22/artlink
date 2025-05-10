@@ -25,7 +25,7 @@ export const LogoutButton = ({className}:LogoutButtonProps) => {
           toast.success(res?.success);
         }
         await updateSession();
-        router.push("/auth/login");
+        router.push("/login");
       });
     });
   };
