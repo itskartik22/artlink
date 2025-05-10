@@ -10,7 +10,7 @@ export default function Setting() {
   const router = useRouter();
   useEffect(() => {
     if (!session.isAuthenticated) {
-      router.push("/auth/login");
+      router.push("/login");
     }
   });
   

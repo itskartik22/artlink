@@ -13,7 +13,7 @@ export default function Profile() {
 
   // useEffect(() => {
   //   if (!session.isAuthenticated) {
-  //     router.push("/auth/login");
+  //     router.push("/login");
   //   }
   //   if (session.user && !session.user.userType) {
   //     router.push("/user/profile-type");

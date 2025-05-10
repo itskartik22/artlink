@@ -6,9 +6,6 @@ export const privateRoutes = [
     "/profile",
     "/dashboard",
     "/payment",
-    "/api/order",
-    "/api/verify",
-    "/api/user/management",
 ];
 
 /**
