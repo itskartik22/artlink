@@ -13,8 +13,10 @@ const Layout = ({ children }: LayoutProps) => {
   const pathname = usePathname();
   // console.log(pathname);
   const list = [
-    { category: "Profile Setting", link: "/profilesetting" },
-    { category: "Orders", link: "/yourorders" },
+    { category: "Orders", link: "/profile/orders" },
+    { category: "Payment Details", link: "/profile/payments" },
+    { category: "Notifications", link: "/profile/notifications" },
+    { category: "Settings", link: "/profile/settings" },
   ];
 
   const [sidebar, setSidebar] = useState(false);
@@ -64,7 +66,7 @@ const Layout = ({ children }: LayoutProps) => {
               }}
               className={`px-4 py-4 text-slate-900 border-b-2 border-slate-200 text-sm cursor-pointer  ${
                 pathname === item.link
-                  ? "bg-[#d9eef6]"
+                  ? "bg-slate-200"
                   : "text-slate-900 hover:bg-white"
               }`}
             >

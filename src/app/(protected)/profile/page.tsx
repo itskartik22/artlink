@@ -19,10 +19,13 @@ export default function Profile() {
   //     router.push("/user/profile-type");
   //   }
   // });
-  console.log(user)
+  console.log(user);
 
   return (
-    <div className="w-[100%]">
+    <div className="px-5 py-4 gap-8 h-full min-h-96 w-full flex flex-col rounded-lg shadow-md border-2 xl:ml-4">
+      <div className="relative w-full flex flex-col gap-4">
+        <h2 className="text-xl font-bold text-[#1f4e5f]">Profile</h2>
+      </div>
       {}
       {/* <h1>Profile</h1>
       <p className="flex">
