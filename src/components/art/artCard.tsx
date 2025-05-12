@@ -29,7 +29,7 @@ const ArtCard = ({ title, imageURL, ratio, artist, likes }: Props) => {
         alt={title}
         width={400}
         height={ratio === "square" ? 400 : ratio === "portrait" ? 500 : 300}
-        className={`rounded-xl cursor-pointer relative z-0 min-w-full border-2 `}
+        className={`rounded-xl cursor-pointer relative z-0 w-full border-2 `}
       />
       <div className="flex gap-4 justify-between p-1">
         <p className="text-gray-800">@{artist}</p>
