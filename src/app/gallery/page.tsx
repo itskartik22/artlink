@@ -4,7 +4,7 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogHeader,
+  // DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
@@ -216,7 +216,7 @@ const Gallery = () => {
         {artData.map((art, index) => (
           // eslint-disable-next-line
           <Dialog key={index}>
-            <DialogTrigger className="mb-4">
+            <DialogTrigger className="mb-4 w-full">
               <ArtCard
                 title={art.title}
                 imageURL={art.imageURL}
