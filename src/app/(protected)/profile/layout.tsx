@@ -52,7 +52,7 @@ const Layout = ({ children }: LayoutProps) => {
             onClick={() => {
               setSidebar(false);
             }}
-            className={`px-4 py-4  rounded-t-md  text-base ${
+            className={`px-4 py-3  rounded-t-md  text-sm ${
               pathname === "/profile"
                 ? "bg-slate-900 text-white"
                 : "text-slate-900 hover:bg-white"
