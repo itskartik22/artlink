@@ -1,7 +1,9 @@
 "use client"
-import { useSessionContext } from "@/context/SessionContext"
+
+import { useSession } from "next-auth/react";
 
 export const useLoggedInStatus = () => {
-    const {session} = useSessionContext()
-    return !!session.user;
+    const {data: session} = useSession();
+    console.log(session, "session")
+    return !!session;
 }

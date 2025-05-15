@@ -8,6 +8,7 @@ import ArtistProfile from "@/components/profile/ArtistProfile";
 // import { useEffect } from "react";
 import ProfileComp from "@/components/profile/ProfileComp";
 
+
 export default function Profile() {
   //   const user = useCurrentUser();
   // const user = useCurrentUser();

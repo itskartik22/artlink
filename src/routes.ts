@@ -4,8 +4,7 @@
  */
 export const privateRoutes = [
     "/profile",
-    "/dashboard",
-    "/payment",
+    "/settings"
 ];
 
 /**
@@ -29,4 +28,4 @@ export const apiAuthPrefix = "/api/auth";
  * The simple redirect path after logged in
  * @type {string}
  */
-export const DEFAULT_LOGIN_REDIRECT = "/profile";
+export const DEFAULT_LOGIN_REDIRECT = "/";
