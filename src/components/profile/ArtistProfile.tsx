@@ -1,0 +1,238 @@
+import React from "react";
+import { useForm } from "react-hook-form";
+import {
+  Form,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+} from "@/components/ui/form";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Plus } from "lucide-react";
+
+export default function ArtistProfile() {
+  const form = useForm({
+    defaultValues: {
+      name: "Kartik Thakur",
+      username: "itskartik",
+      bio: "Bio",
+      email: "thakurkartik2262@gmail.com",
+      countryCode: "+91",
+      mobile: "9608446908",
+      dob: "May 18, 2002",
+      location: "Bihar, Muzaffarpur",
+      medium: "Painting , Sculpture & Digital Arts",
+      experience: "5",
+      education: "Intermediate",
+      portfolio: "portfolio.name.com",
+      award: "Name_Award",
+    },
+  });
+
+  return (
+    <Card className="w-full mx-auto border-none">
+      <CardContent className="p-6">
+        {/* Avatar and Name */}
+        <div className="flex items-center gap-4 mb-6">
+          <div className="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center text-4xl">
+            <span role="img" aria-label="avatar">
+              👤
+            </span>
+          </div>
+          <div>
+            <div className="font-semibold text-xl">Kartik Thakur</div>
+            <div className="text-gray-500 text-sm">
+              thakurkartik2262@gmail.com
+            </div>
+          </div>
+        </div>
+
+        {/* Personal Info */}
+        <div className="flex items-center gap-2 mb-2">
+          <div className="border-t w-6 border-gray-900" />
+          <span className="font-medium">Personal</span>
+          <div className="flex-1 border-t border-gray-900" />
+        </div>
+
+        <Form {...form}>
+          <form className="flex flex-col gap-3">
+            {/* Personal Fields */}
+            <FormField
+              name="name"
+              control={form.control}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-sm text-gray-700">Name</FormLabel>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+            <FormField
+              name="username"
+              control={form.control}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-sm text-gray-700">
+                    Username
+                  </FormLabel>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+            <FormField
+              name="bio"
+              control={form.control}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-sm text-gray-700">Bio</FormLabel>
+                  <FormControl>
+                    <Textarea {...field} rows={2} />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+            <FormField
+              name="email"
+              control={form.control}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-sm text-gray-700">Email</FormLabel>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+            <FormItem>
+              <FormLabel className="text-sm text-gray-700">Mobile</FormLabel>
+              <div className="flex gap-2">
+                <FormControl>
+                  <Input {...form.register("countryCode")} className="w-16" />
+                </FormControl>
+                <FormControl>
+                  <Input {...form.register("mobile")} />
+                </FormControl>
+              </div>
+            </FormItem>
+            <FormField
+              name="dob"
+              control={form.control}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-sm text-gray-700">
+                    Date of Birth
+                  </FormLabel>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+            <FormField
+              name="location"
+              control={form.control}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-sm text-gray-700">
+                    Location
+                  </FormLabel>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+
+            {/* Professional Info */}
+            <div className="flex items-center gap-2 mt-4 mb-2">
+              <div className="border-t w-6 border-gray-900" />
+              <span className="font-medium">Professional</span>
+              <div className="flex-1 border-t border-gray-900" />
+            </div>
+            <FormField
+              name="medium"
+              control={form.control}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-sm text-gray-700">
+                    Artistic Medium
+                  </FormLabel>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+            <FormField
+              name="experience"
+              control={form.control}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-sm text-gray-700">
+                    Years of Experience
+                  </FormLabel>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+            <FormField
+              name="education"
+              control={form.control}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-sm text-gray-700">
+                    Education
+                  </FormLabel>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+            <FormItem>
+              <FormLabel className="text-sm text-gray-700">Portfolio</FormLabel>
+              <div className="flex gap-2">
+                <FormControl>
+                  <Input {...form.register("portfolio")} />
+                </FormControl>
+                <Button type="button" size="icon" variant="outline">
+                  <Plus className="w-4 h-4" />
+                </Button>
+              </div>
+            </FormItem>
+            <FormItem>
+              <FormLabel className="text-sm text-gray-700">Award</FormLabel>
+              <div className="flex gap-2">
+                <FormControl>
+                  <Input {...form.register("award")} />
+                </FormControl>
+                <Button type="button" size="icon" variant="outline">
+                  <Plus className="w-4 h-4" />
+                </Button>
+              </div>
+            </FormItem>
+
+            {/* Actions */}
+            <div className="flex gap-3 mt-6">
+              <Button type="submit" variant="default">
+                Save Changes
+              </Button>
+              <Button type="button" variant="default">
+                Change Password
+              </Button>
+            </div>
+          </form>
+        </Form>
+      </CardContent>
+    </Card>
+  );
+}

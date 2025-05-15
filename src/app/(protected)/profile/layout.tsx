@@ -13,8 +13,10 @@ const Layout = ({ children }: LayoutProps) => {
   const pathname = usePathname();
   // console.log(pathname);
   const list = [
-    { category: "Profile Setting", link: "/profilesetting" },
-    { category: "Orders", link: "/yourorders" },
+    { category: "Orders", link: "/profile/orders" },
+    { category: "Payment Details", link: "/profile/payments" },
+    { category: "Notifications", link: "/profile/notifications" },
+    { category: "Settings", link: "/profile/settings" },
   ];
 
   const [sidebar, setSidebar] = useState(false);
@@ -28,7 +30,7 @@ const Layout = ({ children }: LayoutProps) => {
         {sidebar ? (
           <ChevronLeft
             onClick={handleSidebar}
-            className="xl:hidden fixed z-50 right-[18%] md:right-[48%] top-1/2 shadow-sm bg-slate-900 rounded-lg stroke-white"
+            className="xl:hidden fixed z-50 right-[38%] md:right-[48%] top-4 shadow-sm bg-slate-900 rounded-lg stroke-white"
             size={32}
           />
         ) : (
@@ -39,9 +41,9 @@ const Layout = ({ children }: LayoutProps) => {
           />
         )}
         <div
-          className={`flex flex-col w-[320px] rounded-lg shadow-md h-[90vh] sticky border-2 bg-white ${
+          className={`flex flex-col w-[320px] rounded-lg shadow-md h-[90vh] max:md-fixed border-2 bg-white ${
             sidebar
-              ? "h-screen w-[80%] md:w-[50%] block z-10 fixed top-0 bottom-0 left-0 right-0 "
+              ? "h-screen w-[60%] md:w-[50%] block z-10 fixed top-0 bottom-0 left-0 right-0 "
               : "hidden xl:flex w-[320px]"
           } `}
         >
@@ -50,21 +52,25 @@ const Layout = ({ children }: LayoutProps) => {
             onClick={() => {
               setSidebar(false);
             }}
-            className="px-4 py-4 bg-slate-800 rounded-t-md text-white text-base"
+            className={`px-4 py-4  rounded-t-md  text-base ${
+              pathname === "/profile"
+                ? "bg-slate-900 text-white"
+                : "text-slate-900 hover:bg-white"
+            }`}
           >
             Profile
           </Link>
 
           {list.map((item, index) => (
             <Link
-              key={index}
               href={item.link}
+              key={index}
               onClick={() => {
                 setSidebar(false);
               }}
-              className={`px-4 py-4 text-slate-900 border-b-2 border-slate-200 text-sm cursor-pointer  ${
+              className={`px-4 py-3 text-slate-900 border-slate-400 text-sm cursor-pointer ${
                 pathname === item.link
-                  ? "bg-[#d9eef6]"
+                  ? "bg-slate-900 text-white"
                   : "text-slate-900 hover:bg-white"
               }`}
             >
@@ -73,7 +79,11 @@ const Layout = ({ children }: LayoutProps) => {
           ))}
         </div>
 
-        <div className="w-full">{children}</div>
+        <div
+          className={`px-5 py-4 gap-8 h-full min-h-96 w-full flex-col rounded-lg shadow-md border-2 md:ml-4 `}
+        >
+          {children}
+        </div>
       </div>
     </div>
   );
