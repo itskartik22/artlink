@@ -1,6 +1,5 @@
 "use client";
 import { LogoutButton } from "@/components/_auth/logout-button";
-import { useSessionContext } from "@/context/SessionContext";
 import { useCurrentUser } from "@/hooks/current-user";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";

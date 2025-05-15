@@ -1,7 +1,7 @@
 "use client"
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from "../ui/button";
 
 import {
@@ -17,9 +17,10 @@ import { FaUserCircle } from "react-icons/fa";
 import { LogoutButton } from "../_auth/logout-button";
 import MobileNav from "./MobileNav";
 import { useLoggedInStatus } from "@/hooks/login-status";
+import { signOut } from "@/auth";
 
-const Navbar = () => {
-  const loggedInStatus = useLoggedInStatus()
+const Navbar = ({ session }) => {
+  const loggedInStatus = !!session;
 
   return (
     <nav className="flex justify-between z-50 w-[100%] gap-5 p-4 shadow-sm sm:px-12">
@@ -82,7 +83,7 @@ const Navbar = () => {
         </div>
         {/* MobileNav Here */}
         <div className="hidden max-sm:flex mr-3">
-          <MobileNav loggedInStatus={loggedInStatus}/>
+          <MobileNav loggedInStatus={loggedInStatus} />
         </div>
       </div>
     </nav>
