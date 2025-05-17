@@ -3,6 +3,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ChevronRight, ChevronLeft } from "lucide-react";
 import { useState } from "react";
+import { useCurrentUser } from "@/hooks/useCurrentUser";
+import ProfileType from "@/components/profile/ProfileType";
 // import Loader from "@/components/shared/Loader";
 
 interface LayoutProps {
@@ -11,6 +13,9 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
   const pathname = usePathname();
+  const user = useCurrentUser();
+
+  console.log(user, "user");
   // console.log(pathname);
   const list = [
     { category: "Orders", link: "/profile/orders" },
@@ -22,6 +27,10 @@ const Layout = ({ children }: LayoutProps) => {
   const [sidebar, setSidebar] = useState(false);
   function handleSidebar() {
     setSidebar(!sidebar);
+  }
+
+  if (user && !user.role) {
+    return <ProfileType />;
   }
 
   return (

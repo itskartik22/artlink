@@ -14,9 +14,9 @@ export async function login(formData: z.infer<typeof LoginSchema>) {
     if (!validateData.success) {
       return { error: "Invalid fields." };
     }
-    const { phone, password } = validateData.data;
+    const { email, password } = validateData.data;
     const response = await signIn("credentials", {
-      phone,
+      email,
       password,
       // redirectTo: DEFAULT_LOGIN_REDIRECT
       redirect: false,
