@@ -1,4 +1,5 @@
 import { prisma } from "./db";
+import User, { UserDocument } from "./models/User";
 
 export async function getUserById(userId: string) {
   try {

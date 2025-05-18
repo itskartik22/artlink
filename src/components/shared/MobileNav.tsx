@@ -3,7 +3,7 @@ import { IoMenu } from "react-icons/io5";
 import { FaUserCircle } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { isLoggedIn } from "@/lib/auth";
+// import { isLoggedIn } from "@/lib/auth";
 
 import {
   Sheet,
@@ -11,7 +11,7 @@ import {
   SheetContent,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { LogoutButton } from "../_auth/logout-button";
+import { LogoutButton } from "../auth/logout-button";
 
 const MobileNav = ({ loggedInStatus }: { loggedInStatus: boolean }) => {
   return (

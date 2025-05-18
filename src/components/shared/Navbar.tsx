@@ -1,25 +1,30 @@
-"use client"
+"use client";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect } from "react";
 import { Button } from "../ui/button";
 
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
+  // DropdownMenuLabel,
+  // DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
 import { FaUserCircle } from "react-icons/fa";
-import { LogoutButton } from "../_auth/logout-button";
+import { LogoutButton } from "../auth/logout-button";
 import MobileNav from "./MobileNav";
-import { useLoggedInStatus } from "@/hooks/login-status";
-import { signOut } from "@/auth";
+import { Session } from "next-auth";
+// import { useLoggedInStatus } from "@/hooks/login-status";
+// import { signOut } from "@/auth";
 
-const Navbar = ({ session }) => {
+interface NavbarProps {
+  session: Session; 
+  // 'Session' from your auth library
+}
+
+const Navbar = ({ session }: NavbarProps) => {
   const loggedInStatus = !!session;
 
   return (
@@ -45,7 +50,7 @@ const Navbar = ({ session }) => {
             <Link href="/cart">Cart</Link>
           </div>
 
-          {(loggedInStatus) ? (
+          {loggedInStatus ? (
             <div className="">
               <DropdownMenu>
                 <DropdownMenuTrigger>
@@ -68,7 +73,7 @@ const Navbar = ({ session }) => {
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem className="w-full">
-                    <LogoutButton className="w-full shadow-md"/>
+                    <LogoutButton className="w-full shadow-md" />
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
