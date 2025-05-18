@@ -64,8 +64,8 @@ export default function ArtistProfile() {
               name="name"
               control={form.control}
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-sm text-gray-700">Name</FormLabel>
+                <FormItem className="flex flex-col md:flex-row md:items-center gap-2">
+                  <FormLabel className="text-sm text-gray-700 min-w-[110px]">Name</FormLabel>
                   <FormControl>
                     <Input {...field} />
                   </FormControl>
@@ -76,8 +76,8 @@ export default function ArtistProfile() {
               name="username"
               control={form.control}
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-sm text-gray-700">
+                <FormItem className="flex flex-col md:flex-row md:items-center gap-2">
+                  <FormLabel className="text-sm text-gray-700 min-w-[110px]">
                     Username
                   </FormLabel>
                   <FormControl>
@@ -90,8 +90,8 @@ export default function ArtistProfile() {
               name="bio"
               control={form.control}
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-sm text-gray-700">Bio</FormLabel>
+                <FormItem className="flex flex-col md:flex-row md:items-center gap-2">
+                  <FormLabel className="text-sm text-gray-700 min-w-[110px]">Bio</FormLabel>
                   <FormControl>
                     <Textarea {...field} rows={2} />
                   </FormControl>
@@ -102,16 +102,16 @@ export default function ArtistProfile() {
               name="email"
               control={form.control}
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-sm text-gray-700">Email</FormLabel>
+                <FormItem className="flex flex-col md:flex-row md:items-center gap-2">
+                  <FormLabel className="text-sm text-gray-700 min-w-[110px]">Email</FormLabel>
                   <FormControl>
                     <Input {...field} />
                   </FormControl>
                 </FormItem>
               )}
             />
-            <FormItem>
-              <FormLabel className="text-sm text-gray-700">Mobile</FormLabel>
+            <FormItem className="flex flex-col md:flex-row md:items-center gap-2">
+              <FormLabel className="text-sm text-gray-700 min-w-[110px]">Mobile</FormLabel>
               <div className="flex gap-2">
                 <FormControl>
                   <Input {...form.register("countryCode")} className="w-16" />
@@ -125,8 +125,8 @@ export default function ArtistProfile() {
               name="dob"
               control={form.control}
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-sm text-gray-700">
+                <FormItem className="flex flex-col md:flex-row md:items-center gap-2">
+                  <FormLabel className="text-sm text-gray-700 min-w-[110px]">
                     Date of Birth
                   </FormLabel>
                   <FormControl>
@@ -139,8 +139,8 @@ export default function ArtistProfile() {
               name="location"
               control={form.control}
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-sm text-gray-700">
+                <FormItem className="flex flex-col md:flex-row md:items-center gap-2">
+                  <FormLabel className="text-sm text-gray-700 min-w-[110px]">
                     Location
                   </FormLabel>
                   <FormControl>
@@ -151,7 +151,7 @@ export default function ArtistProfile() {
             />
 
             {/* Professional Info */}
-            <div className="flex items-center gap-2 mt-4 mb-2">
+            <div className="flex md:items-center gap-2 mt-4 mb-2">
               <div className="border-t w-6 border-gray-900" />
               <span className="font-medium">Professional</span>
               <div className="flex-1 border-t border-gray-900" />
@@ -160,8 +160,8 @@ export default function ArtistProfile() {
               name="medium"
               control={form.control}
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-sm text-gray-700">
+                <FormItem className="flex flex-col md:flex-row md:items-center gap-2">
+                  <FormLabel className="text-sm text-gray-700 min-w-[110px]">
                     Artistic Medium
                   </FormLabel>
                   <FormControl>
@@ -174,8 +174,8 @@ export default function ArtistProfile() {
               name="experience"
               control={form.control}
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-sm text-gray-700">
+                <FormItem className="flex flex-col md:flex-row md:items-center gap-2">
+                  <FormLabel className="text-sm text-gray-700 min-w-[110px]">
                     Years of Experience
                   </FormLabel>
                   <FormControl>
@@ -188,8 +188,8 @@ export default function ArtistProfile() {
               name="education"
               control={form.control}
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-sm text-gray-700">
+                <FormItem className="flex flex-col md:flex-row md:items-center gap-2">
+                  <FormLabel className="text-sm text-gray-700 min-w-[110px]">
                     Education
                   </FormLabel>
                   <FormControl>
@@ -198,8 +198,8 @@ export default function ArtistProfile() {
                 </FormItem>
               )}
             />
-            <FormItem>
-              <FormLabel className="text-sm text-gray-700">Portfolio</FormLabel>
+            <FormItem className="flex flex-col md:flex-row md:items-center gap-2">
+              <FormLabel className="text-sm text-gray-700 min-w-[110px]">Portfolio</FormLabel>
               <div className="flex gap-2">
                 <FormControl>
                   <Input {...form.register("portfolio")} />
@@ -209,8 +209,8 @@ export default function ArtistProfile() {
                 </Button>
               </div>
             </FormItem>
-            <FormItem>
-              <FormLabel className="text-sm text-gray-700">Award</FormLabel>
+            <FormItem className="flex flex-col md:flex-row md:items-center gap-2">
+              <FormLabel className="text-sm text-gray-700 min-w-[110px]">Award</FormLabel>
               <div className="flex gap-2">
                 <FormControl>
                   <Input {...form.register("award")} />

@@ -15,7 +15,7 @@ const artData = [
   {
     title: "Sketch",
     imageURL:
-      "https://instagram.fpat2-4.fna.fbcdn.net/v/t51.29350-15/449335499_876186174321684_4453971110098583231_n.webp?stp=dst-jpg_e35&efg=eyJ2ZW5jb2RlX3RhZyI6ImltYWdlX3VybGdlbi4xNDQweDE4MDAuc2RyLmYyOTM1MCJ9&_nc_ht=instagram.fpat2-4.fna.fbcdn.net&_nc_cat=100&_nc_ohc=-QN3a953A6YQ7kNvgHmHHF1&edm=AEhyXUkBAAAA&ccb=7-5&ig_cache_key=MzQwMTA3MDg5NTE0ODQ3ODc2MQ%3D%3D.2-ccb7-5&oh=00_AYA9Q1ADSNfhv0A0jwJXisazm664LzaKCvLQG_ugZL3TKg&oe=668ADAB4&_nc_sid=8f1549",
+      "https://images.unsplash.com/flagged/photo-1572392640988-ba48d1a74457?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     ratio: "portrait",
     artist: "Kuber",
     price: 699,
@@ -43,7 +43,8 @@ const artData = [
   },
   {
     title: "Vintage Portrait",
-    imageURL: "https://kalakarstudio.in/wp-content/uploads/2022/08/final2.jpeg",
+    imageURL:
+      "https://media.istockphoto.com/id/478287701/photo/decorated-adobe-mud-wall.jpg?s=2048x2048&w=is&k=20&c=8ZjpfoBzkvslhhwJIZ4BRusAecJp1ifKgcYzS_AB1eI=",
     ratio: "square",
     artist: "Artist",
     price: 769,
@@ -62,7 +63,7 @@ const artData = [
   {
     title: "Taylor-Swift Sketch",
     imageURL:
-      "https://instagram.fpat2-4.fna.fbcdn.net/v/t51.29350-15/277406972_932479847430780_5713732080138351171_n.webp?stp=dst-jpg_e35&efg=eyJ2ZW5jb2RlX3RhZyI6ImltYWdlX3VybGdlbi4xNDQweDE0NDAuc2RyLmYyOTM1MCJ9&_nc_ht=instagram.fpat2-4.fna.fbcdn.net&_nc_cat=100&_nc_ohc=O9z_a41PweAQ7kNvgG1lYdm&edm=AFg4Q8wBAAAA&ccb=7-5&ig_cache_key=MjgwMzMxNzI0MDIyNzcwODMyNA%3D%3D.2-ccb7-5&oh=00_AYAK6nB6fOpOheyTbIGUN4G-xcXimJ7aA8DA8hhlxt21CA&oe=668B4CB0&_nc_sid=0b30b7",
+      "https://images.unsplash.com/photo-1533158326339-7f3cf2404354?q=80&w=1968&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     ratio: "square",
     artist: "Ashutosh",
     price: 949,
@@ -111,7 +112,7 @@ const artData = [
   {
     title: "Digital Dream",
     imageURL:
-      "https://instagram.fpat2-3.fna.fbcdn.net/v/t51.29350-15/348258009_527959269369503_4043111816852907375_n.webp?stp=dst-jpg_e35&efg=eyJ2ZW5jb2RlX3RhZyI6ImltYWdlX3VybGdlbi4xNDQweDE2OTIuc2RyLmYyOTM1MCJ9&_nc_ht=instagram.fpat2-3.fna.fbcdn.net&_nc_cat=111&_nc_ohc=OWkCWF1ZUX0Q7kNvgEgiqwn&edm=AEhyXUkBAAAA&ccb=7-5&ig_cache_key=MzEwODA4MTUzMDI4NjQwNjM4Mw%3D%3D.2-ccb7-5&oh=00_AYD9lrubp2a3vyyhqc_onxjuU_FxRdN7q4sPzOLItm7gvQ&oe=668AFE03&_nc_sid=8f1549",
+      "https://images.unsplash.com/flagged/photo-1572392640988-ba48d1a74457?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     ratio: "portrait",
     artist: "Ashutosh",
     price: 976,
@@ -130,7 +131,7 @@ const artData = [
   {
     title: "Acrylic Painting - Demon Slayer",
     imageURL:
-      "https://instagram.fpat2-1.fna.fbcdn.net/v/t51.29350-15/304853628_1652786531781686_4907103564604972154_n.webp?stp=dst-jpg_e35&efg=eyJ2ZW5jb2RlX3RhZyI6ImltYWdlX3VybGdlbi4xNDQweDEwODAuc2RyLmYyOTM1MCJ9&_nc_ht=instagram.fpat2-1.fna.fbcdn.net&_nc_cat=102&_nc_ohc=uUd8oOZ0_2MQ7kNvgGKpFrr&edm=AFg4Q8wBAAAA&ccb=7-5&ig_cache_key=MjkxOTc4NTUxOTUyNjE2ODQ4MA%3D%3D.2-ccb7-5&oh=00_AYC1qcbRnOOC_EN8dmy8XQNKjRTlehqQYfO2V9D7jEoSNQ&oe=668B4DC6&_nc_sid=0b30b7",
+      "https://media.istockphoto.com/id/478287701/photo/decorated-adobe-mud-wall.jpg?s=2048x2048&w=is&k=20&c=8ZjpfoBzkvslhhwJIZ4BRusAecJp1ifKgcYzS_AB1eI=",
     ratio: "landscape",
     artist: "Ashutosh",
     price: 761,
@@ -167,8 +168,7 @@ const artData = [
   },
   {
     title: "Line Art",
-    imageURL:
-      "https://scontent.cdninstagram.com/v/t51.29350-15/309469355_154275657071363_1576016343352287926_n.webp?stp=dst-jpg_e35&efg=eyJ2ZW5jb2RlX3RhZyI6ImltYWdlX3VybGdlbi4xNDQweDE0NDAuc2RyLmYyOTM1MCJ9&_nc_ht=scontent.cdninstagram.com&_nc_cat=111&_nc_ohc=9fBeH86z4DAQ7kNvgGdYs3H&edm=APs17CUBAAAA&ccb=7-5&ig_cache_key=MjkzNzA3MDEzMjk1NDcyMTQ1Mw%3D%3D.2-ccb7-5&oh=00_AYB6Z5Uk_1Fu-huBjbk7nUdF7Q6Ygqaqy2pAE1j0HUmRsw&oe=668B6CB4&_nc_sid=10d13b",
+    imageURL: "/img/login.jpeg",
     ratio: "square",
     artist: "Ashutosh",
     price: 888,
@@ -178,7 +178,7 @@ const artData = [
   {
     title: "Taylor-Swift Sketch",
     imageURL:
-      "https://scontent.cdninstagram.com/v/t51.29350-15/409726386_182689278203203_5438135329010955896_n.webp?stp=dst-jpg_e35&efg=eyJ2ZW5jb2RlX3RhZyI6ImltYWdlX3VybGdlbi4xMDgweDEzNTAuc2RyLmYyOTM1MCJ9&_nc_ht=scontent.cdninstagram.com&_nc_cat=107&_nc_ohc=SvaBXStxsG0Q7kNvgGfy6J3&edm=APs17CUBAAAA&ccb=7-5&ig_cache_key=MzI1NjYxMDYzNzc5NzQ5NjM2MQ%3D%3D.2-ccb7-5&oh=00_AYB8TLu9NCfhTDx6kuSls6PQlf14oPYeN0ZiuuJRrrNNeA&oe=668AEC41&_nc_sid=10d13b",
+      "https://images.unsplash.com/flagged/photo-1572392640988-ba48d1a74457?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     ratio: "portrait",
     artist: "Ashutosh",
     price: 913,
@@ -187,8 +187,7 @@ const artData = [
   },
   {
     title: "Peaceful Moment",
-    imageURL:
-      "https://instagram.fpat2-2.fna.fbcdn.net/v/t51.29350-15/286127326_1021046591879026_8628488992768740112_n.webp?stp=dst-jpg_e35&efg=eyJ2ZW5jb2RlX3RhZyI6ImltYWdlX3VybGdlbi4xNDQweDE0NDAuc2RyLmYyOTM1MCJ9&_nc_ht=instagram.fpat2-2.fna.fbcdn.net&_nc_cat=110&_nc_ohc=OlX35_gmLLEQ7kNvgGQwkh6&edm=AFg4Q8wBAAAA&ccb=7-5&ig_cache_key=Mjg1Mzk4MjEyMjQ0NDk2OTQ4OA%3D%3D.2-ccb7-5&oh=00_AYBoFmvcoAhtPsXzDUKuvk28hVQrFvPJL8sYdnDod1eV6g&oe=668B507A&_nc_sid=0b30b7",
+    imageURL: "/img/login.jpeg",
     ratio: "square",
     artist: "Ashutosh",
     price: 792,
