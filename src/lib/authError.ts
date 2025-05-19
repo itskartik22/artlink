@@ -58,7 +58,7 @@ export class ExtendedAuthError extends AuthError {
     this.kind = this.constructor.kind ?? "error"
 
     Error.captureStackTrace?.(this, this.constructor)
-    const url = `https://errors.authjs.dev#${this.type.toLowerCase()}`
+    const url = `https://errors.authjs.dev#${ExtendedAuthError.type.toLowerCase()}`
     this.message += `${this.message ? ". " : ""}Read more at ${url}`
   }
 }

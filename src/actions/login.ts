@@ -2,8 +2,6 @@
 import { LoginSchema } from "@/lib/definitions";
 import { z } from "zod";
 import { AuthError } from "next-auth";
-import { revalidatePath } from "next/cache";
-import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 import { signIn } from "@/auth";
 
 
@@ -15,7 +13,7 @@ export async function login(formData: z.infer<typeof LoginSchema>) {
       return { error: "Invalid fields." };
     }
     const { email, password } = validateData.data;
-    const response = await signIn("credentials", {
+    await signIn("credentials", {
       email,
       password,
       // redirectTo: DEFAULT_LOGIN_REDIRECT
@@ -24,15 +22,16 @@ export async function login(formData: z.infer<typeof LoginSchema>) {
     // revalidatePath("/");
     return { success: "Login successfully." };
   } catch (error) {
+      return { error: "Something went wrong!" };
     // console.error(error);
-    if (error instanceof AuthError) {
-      switch (error.type) {
-        case "CredentialsSignin":
-          return { error: "Invalid Credential!" };
-        default:
-          return { error: "Something went wrong!" };
-      }
-    }
+    // if (error instanceof AuthError) {
+    //   switch (error) {
+    //     case "CredentialsSignin":
+    //       return { error: "Invalid Credential!" };
+    //     default:
+    //       return { error: "Something went wrong!" };
+    //   }
+    // }
   }
 }
 export async function otpLogin(values: { email: string; otp: string }) {
@@ -43,7 +42,7 @@ export async function otpLogin(values: { email: string; otp: string }) {
 
   console.log("phone", email, otp);
   try {
-    const response = await signIn("credentials", {
+    await signIn("credentials", {
       email,
       otp,
       // redirectTo: DEFAULT_LOGIN_REDIRECT
@@ -54,7 +53,7 @@ export async function otpLogin(values: { email: string; otp: string }) {
   } catch (error) {
     console.error(error);
     if (error instanceof AuthError) { 
-      switch (error.type) {
+      switch (error.cause) {
         case "CredentialsSignin":
           return { error: "Invalid Credential!" };
         default:
