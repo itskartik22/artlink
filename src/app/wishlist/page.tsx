@@ -1,9 +1,10 @@
+import WishlistComponent from "@/components/wishlist/WishlistComponent";
 import React from "react";
 
 const Wishlist = () => {
   return (
-    <div>
-      <p>Wishlist</p>
+    <div className="w-full px-10 py-4">
+      <WishlistComponent />
     </div>
   );
 };
