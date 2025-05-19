@@ -20,7 +20,7 @@ import { Session } from "next-auth";
 // import { signOut } from "@/auth";
 
 interface NavbarProps {
-  session: Session; 
+  session: Session | null; 
   // 'Session' from your auth library
 }
 

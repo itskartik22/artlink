@@ -9,6 +9,7 @@ export async function logout() {
       success: "Logged out successfully",
     };
   } catch (error) {
+    console.error(error);
     return {
       error: "Something went wrong!",
     };
