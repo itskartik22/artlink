@@ -2,7 +2,10 @@
 
 import { prisma } from "@/lib/db";
 
-export async function getUser (userId: string) {
+export async function getUser(userId: string | null) {
+  if (!userId) { 
+    return { error: "User ID is required." };
+  }
   try {
     const user = await prisma.user.findUnique({
       where: {

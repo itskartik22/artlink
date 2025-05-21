@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import {
   Form,
@@ -12,25 +13,57 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Plus } from "lucide-react";
+import { getUser } from "@/actions/userAction";
+import { useCurrentUser } from "@/hooks/useCurrentUser";
+
+type UserInfo = {
+  name: string;
+  username: string;
+  bio: string;
+  email: string;
+  countryCode: string;
+  mobile: string;
+  dob: string;
+  location: string;
+  medium: string;
+  experience: string;
+  education: string;
+  portfolio: string;
+  award: string;
+};
+
+
 
 export default function ArtistProfile() {
-  const form = useForm({
-    defaultValues: {
-      name: "Kartik Thakur",
-      username: "itskartik",
-      bio: "Bio",
-      email: "thakurkartik2262@gmail.com",
-      countryCode: "+91",
-      mobile: "9608446908",
-      dob: "May 18, 2002",
-      location: "Bihar, Muzaffarpur",
-      medium: "Painting , Sculpture & Digital Arts",
-      experience: "5",
-      education: "Intermediate",
-      portfolio: "portfolio.name.com",
-      award: "Name_Award",
-    },
+  const [userInfo, setUserInfo] = useState<UserInfo>({
+    name: "",
+    username: "",
+    bio: "",
+    email: "",
+    countryCode: "",
+    mobile: "",
+    dob: "",
+    location: "",
+    medium: "",
+    experience: "",
+    education: "",
+    portfolio: "",
+    award: "",
   });
+  const form = useForm<UserInfo>({
+    defaultValues:  userInfo,
+  });
+  const user = useCurrentUser();
+  // console.log(user);
+  const handleGetUserInfo = async () => {
+    const data = await getUser(user?.id || null);
+    if (!data) return;
+    // setUserInfo(data);
+  };
+
+  useEffect(() => {
+    handleGetUserInfo();
+  }, [user]);
 
   return (
     <Card className="w-full mx-auto border-none">
@@ -65,7 +98,9 @@ export default function ArtistProfile() {
               control={form.control}
               render={({ field }) => (
                 <FormItem className="flex flex-col md:flex-row md:items-center gap-2">
-                  <FormLabel className="text-sm text-gray-700 min-w-[110px]">Name</FormLabel>
+                  <FormLabel className="text-sm text-gray-700 min-w-[110px]">
+                    Name
+                  </FormLabel>
                   <FormControl>
                     <Input {...field} />
                   </FormControl>
@@ -91,7 +126,9 @@ export default function ArtistProfile() {
               control={form.control}
               render={({ field }) => (
                 <FormItem className="flex flex-col md:flex-row md:items-center gap-2">
-                  <FormLabel className="text-sm text-gray-700 min-w-[110px]">Bio</FormLabel>
+                  <FormLabel className="text-sm text-gray-700 min-w-[110px]">
+                    Bio
+                  </FormLabel>
                   <FormControl>
                     <Textarea {...field} rows={2} />
                   </FormControl>
@@ -103,7 +140,9 @@ export default function ArtistProfile() {
               control={form.control}
               render={({ field }) => (
                 <FormItem className="flex flex-col md:flex-row md:items-center gap-2">
-                  <FormLabel className="text-sm text-gray-700 min-w-[110px]">Email</FormLabel>
+                  <FormLabel className="text-sm text-gray-700 min-w-[110px]">
+                    Email
+                  </FormLabel>
                   <FormControl>
                     <Input {...field} />
                   </FormControl>
@@ -111,7 +150,9 @@ export default function ArtistProfile() {
               )}
             />
             <FormItem className="flex flex-col md:flex-row md:items-center gap-2">
-              <FormLabel className="text-sm text-gray-700 min-w-[110px]">Mobile</FormLabel>
+              <FormLabel className="text-sm text-gray-700 min-w-[110px]">
+                Mobile
+              </FormLabel>
               <div className="flex gap-2">
                 <FormControl>
                   <Input {...form.register("countryCode")} className="w-16" />
@@ -199,7 +240,9 @@ export default function ArtistProfile() {
               )}
             />
             <FormItem className="flex flex-col md:flex-row md:items-center gap-2">
-              <FormLabel className="text-sm text-gray-700 min-w-[110px]">Portfolio</FormLabel>
+              <FormLabel className="text-sm text-gray-700 min-w-[110px]">
+                Portfolio
+              </FormLabel>
               <div className="flex gap-2">
                 <FormControl>
                   <Input {...form.register("portfolio")} />
@@ -210,7 +253,9 @@ export default function ArtistProfile() {
               </div>
             </FormItem>
             <FormItem className="flex flex-col md:flex-row md:items-center gap-2">
-              <FormLabel className="text-sm text-gray-700 min-w-[110px]">Award</FormLabel>
+              <FormLabel className="text-sm text-gray-700 min-w-[110px]">
+                Award
+              </FormLabel>
               <div className="flex gap-2">
                 <FormControl>
                   <Input {...form.register("award")} />
