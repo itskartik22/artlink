@@ -1,5 +1,6 @@
 "use client";
 import { CldUploadWidget } from "next-cloudinary";
+import { Button } from "../ui/button";
 
 const UploadImage = () => {
   return (
@@ -11,7 +12,7 @@ const UploadImage = () => {
       }}
     >
       {({ open }) => {
-        return <button onClick={() => open()}>Upload an Image</button>;
+        return <Button className="w-fit" onClick={() => open()}>Upload an artwork</Button>;
       }}
     </CldUploadWidget>
   );
