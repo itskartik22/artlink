@@ -15,7 +15,9 @@ export async function getUser(userId: string | null) {
     if (!user) {
       return { error: "User not found." };
     }
-    return user;
+    return {
+      user
+    };
   } catch (error) {
     console.error(error);
     return { error: "Error fetching user." };
