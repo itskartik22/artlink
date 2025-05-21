@@ -15,13 +15,21 @@ const Layout = ({ children }: LayoutProps) => {
   const pathname = usePathname();
   const user = useCurrentUser();
 
-  console.log(user, "user");
+  // console.log(user, "user");
   // console.log(pathname);
   const list = [
     { category: "Orders", link: "/profile/orders" },
     { category: "Payment Details", link: "/profile/payments" },
     { category: "Notifications", link: "/profile/notifications" },
     { category: "Settings", link: "/profile/settings" },
+  ];
+
+  const artistList = [
+    { category: "Orders", link: "/profile/orders" },
+    { category: "Payment info", link: "/profile/payments/info" },
+    { category: "Notifications", link: "/profile/notifications" },
+    { category: "Settings", link: "/profile/settings" },
+    { category: "My Artworks", link: "/profile/artworks" },
   ];
 
   const [sidebar, setSidebar] = useState(false);
@@ -70,7 +78,47 @@ const Layout = ({ children }: LayoutProps) => {
             Profile
           </Link>
 
-          {list.map((item, index) => (
+          {user && user.role === "Artist" ? (
+            <div className="flex flex-col w-full">
+              {artistList.map((item, index) => (
+                <Link
+                  href={item.link}
+                  key={index}
+                  onClick={() => {
+                    setSidebar(false);
+                  }}
+                  className={`px-4 py-3 text-slate-900 border-slate-400 text-sm cursor-pointer ${
+                    pathname === item.link
+                      ? "bg-slate-900 text-white"
+                      : "text-slate-900 hover:bg-white"
+                  }`}
+                >
+                  {item.category}
+                </Link>
+              ))}
+            </div>
+          ) : (
+            <div className="flex flex-col w-full">
+              {list.map((item, index) => (
+                <Link
+                  href={item.link}
+                  key={index}
+                  onClick={() => {
+                    setSidebar(false);
+                  }}
+                  className={`px-4 py-3 text-slate-900 border-slate-400 text-sm cursor-pointer ${
+                    pathname === item.link
+                      ? "bg-slate-900 text-white"
+                      : "text-slate-900 hover:bg-white"
+                  }`}
+                >
+                  {item.category}
+                </Link>
+              ))}
+            </div>
+          )}
+
+          {/* {list.map((item, index) => (
             <Link
               href={item.link}
               key={index}
@@ -85,7 +133,7 @@ const Layout = ({ children }: LayoutProps) => {
             >
               {item.category}
             </Link>
-          ))}
+          ))} */}
         </div>
 
         <div
