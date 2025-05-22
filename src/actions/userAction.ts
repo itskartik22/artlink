@@ -3,7 +3,7 @@
 import { prisma } from "@/lib/db";
 
 export async function getUser(userId: string | null) {
-  if (!userId) { 
+  if (!userId) {
     return { error: "User ID is required." };
   }
   try {
@@ -24,7 +24,9 @@ export async function getUser(userId: string | null) {
   }
 }
 
-export async function updateUser (userId: string, data: any) {
+export async function updateUser(userId: string, data: any) {
+
+  console.log("updateUser", userId, data);
   try {
     const user = await prisma.user.update({
       where: {
@@ -35,14 +37,14 @@ export async function updateUser (userId: string, data: any) {
     if (!user) {
       return { error: "User not found." };
     }
-    return user;
+    return { user };
   } catch (error) {
     console.error(error);
     return { error: "Error updating user." };
   }
 }
 
-export async function deleteUser (userId: string) {
+export async function deleteUser(userId: string) {
   try {
     const user = await prisma.user.delete({
       where: {

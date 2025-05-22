@@ -11,7 +11,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useCurrentUser } from "@/hooks/useCurrentUser";
-import { getUser } from "@/actions/userAction";
+import { getUser, updateUser } from "@/actions/userAction";
 
 const artStyles = [
   "Abstract Art",
@@ -39,11 +39,10 @@ type UserInfo = {
   email: string;
   username: string;
   countryCode: string;
-  mobile: string;
-  dob: Date | string;
+  phone: string;
+  // dob: Date | string;
   location: string;
 };
-
 
 const ProfileComp = () => {
   const [userInfo, setUserInfo] = useState<UserInfo>({
@@ -51,8 +50,8 @@ const ProfileComp = () => {
     email: "",
     username: "",
     countryCode: "",
-    mobile: "",
-    dob: "",
+    phone: "",
+    // dob: "",
     location: "",
   });
   const [edit, setEdit] = useState(false);
@@ -70,21 +69,41 @@ const ProfileComp = () => {
     if (!data || data.error) return;
     setUserInfo({
       name: data.user?.name || "",
-      username: "",
+      username: data.user?.username || "",
       email: data.user?.email || "",
-      countryCode: data.user?.country || "",
-      mobile: data.user?.phone || "",
-      dob: data.user?.dob || "",
+      countryCode: data.user?.countryCode || "",
+      phone: data.user?.phone || "",
+      // dob: data.user?.dob || "",
       location: data.user?.location || "",
     });
   };
 
   useEffect(() => {
     handleGetUserInfo();
-    console.log("userInfo", userInfo);
+    // console.log("userInfo", userInfo);
   }, [user]);
 
   const handleEdit = () => setEdit((prev) => !prev);
+
+  const handleSave = async () => {
+    if (!user) {
+      setEdit(false);
+      return;
+    }
+    // Get latest values from the form
+    const values = userInfo;
+    const res = await updateUser(user.id, {
+      ...values,
+    });
+    console.log("res", res);
+    if (!res || res.error) {
+      // Optionally show error feedback here
+      setEdit(false);
+      return;
+    }
+    setUserInfo(values); // Update local state with saved values
+    setEdit(false);
+  };
 
   return (
     <Card className="w-full border-none">
@@ -109,11 +128,11 @@ const ProfileComp = () => {
           <div className="flex-1 border-t border-gray-900" />
           <Button
             type="button"
-            variant="outline"
             size="icon"
             onClick={handleEdit}
+            className={`${edit ? "bg-red-500 text-white font-extrabold" : ""} `}
           >
-            {edit ? "Save" : "Edit"}
+            {edit ? "X" : "Edit"}
           </Button>
           <div className="w-6 border-t border-gray-900" />
         </div>
@@ -124,8 +143,10 @@ const ProfileComp = () => {
               control={form.control}
               name="name"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-sm text-gray-700">Name</FormLabel>
+                <FormItem className="flex flex-col md:flex-row md:items-center gap-2">
+                  <FormLabel className="text-sm text-gray-700 min-w-[110px]">
+                    Name
+                  </FormLabel>
                   <FormControl>
                     <Input
                       {...field}
@@ -143,17 +164,12 @@ const ProfileComp = () => {
               control={form.control}
               name="email"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-sm text-gray-700">Email</FormLabel>
+                <FormItem className="flex flex-col md:flex-row md:items-center gap-2">
+                  <FormLabel className="text-sm text-gray-700 min-w-[110px]">
+                    Email
+                  </FormLabel>
                   <FormControl>
-                    <Input
-                      {...field}
-                      value={userInfo.email}
-                      disabled={!edit}
-                      onChange={(e) =>
-                        setUserInfo({ ...userInfo, email: e.target.value })
-                      }
-                    />
+                    <Input {...field} value={userInfo.email} disabled />
                   </FormControl>
                 </FormItem>
               )}
@@ -162,8 +178,8 @@ const ProfileComp = () => {
               control={form.control}
               name="username"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-sm text-gray-700">
+                <FormItem className="flex flex-col md:flex-row md:items-center gap-2">
+                  <FormLabel className="text-sm text-gray-700 min-w-[110px]">
                     Username
                   </FormLabel>
                   <FormControl>
@@ -179,8 +195,10 @@ const ProfileComp = () => {
                 </FormItem>
               )}
             />
-            <FormItem>
-              <FormLabel className="text-sm text-gray-700">Mobile</FormLabel>
+            <FormItem className="flex flex-col md:flex-row md:items-center gap-2">
+              <FormLabel className="text-sm text-gray-700 min-w-[110px]">
+                phone
+              </FormLabel>
               <div className="flex gap-2">
                 <FormControl>
                   <Input
@@ -194,26 +212,27 @@ const ProfileComp = () => {
                 </FormControl>
                 <FormControl>
                   <Input
-                    value={userInfo.mobile}
+                    value={userInfo.phone}
                     disabled={!edit}
                     onChange={(e) =>
-                      setUserInfo({ ...userInfo, mobile: e.target.value })
+                      setUserInfo({ ...userInfo, phone: e.target.value })
                     }
                   />
                 </FormControl>
               </div>
             </FormItem>
-            <FormField
+            {/* <FormField
               control={form.control}
               name="dob"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-sm text-gray-700">
+                <FormItem className="flex flex-col md:flex-row md:items-center gap-2">
+                  <FormLabel className="text-sm text-gray-700 min-w-[110px] item-center">
                     Date of Birth
                   </FormLabel>
                   <FormControl>
                     <Input
                       {...field}
+                      type="date"
                       value={
                         field.value instanceof Date
                           ? field.value.toISOString().slice(0, 10)
@@ -227,13 +246,13 @@ const ProfileComp = () => {
                   </FormControl>
                 </FormItem>
               )}
-            />
+            /> */}
             <FormField
               control={form.control}
               name="location"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-sm text-gray-700">
+                <FormItem className="flex flex-col md:flex-row md:items-center gap-2">
+                  <FormLabel className="text-sm text-gray-700 min-w-[110px]">
                     Location
                   </FormLabel>
                   <FormControl>
@@ -254,7 +273,15 @@ const ProfileComp = () => {
 
         {/* Action Buttons */}
         <div className="flex gap-3 mt-4">
-          <Button variant="default">Edit Profile</Button>
+          <Button
+            onClick={() => {
+              handleSave();
+              setEdit(false);
+            }}
+            className={`${edit ? "bg-blue-500 text-white" : "hidden"}`}
+          >
+            Save
+          </Button>
           <Button variant="default">Change Password</Button>
         </div>
 

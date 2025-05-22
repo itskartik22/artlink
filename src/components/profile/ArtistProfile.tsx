@@ -13,34 +13,35 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 // import { Plus } from "lucide-react";
-import { getUser } from "@/actions/userAction";
+import { getUser, updateUser } from "@/actions/userAction";
 import { useCurrentUser } from "@/hooks/useCurrentUser";
 
 type UserInfo = {
   name?: string;
   username?: string;
   bio: string;
-  email: string;
+  // email: string;
   countryCode: string;
-  mobile: string;
-  dob?: Date | string;
+  phone: string;
+  // dob?: Date | string;
   location: string;
-  medium: string;
-  experience: string;
+  medium?: string;
+  experience?: string;
   education: string;
   portfolio?: string;
   award?: string;
 };
 
 export default function ArtistProfile() {
+  const user = useCurrentUser();
   const [userInfo, setUserInfo] = useState<UserInfo>({
     name: "",
     username: "",
     bio: "",
-    email: "",
+    // email: "",
     countryCode: "",
-    mobile: "",
-    dob: "",
+    phone: "",
+    // dob: "",
     location: "",
     medium: "",
     experience: "",
@@ -48,28 +49,23 @@ export default function ArtistProfile() {
     portfolio: "",
     award: "",
   });
-  const form = useForm<UserInfo>({
-    defaultValues: userInfo,
-  });
-  const user = useCurrentUser();
-  // console.log(user);
   const handleGetUserInfo = async () => {
     const data = await getUser(user?.id || null);
     if (!data || data.error) return;
     setUserInfo({
       name: data.user?.name || "",
-      username: "",
+      username: data.user?.username || "",
       bio: data.user?.bio || "",
-      email: data.user?.email || "",
-      countryCode: data.user?.country || "",
-      mobile: data.user?.phone || "",
-      dob: data.user?.dob || "",
+      // email: data.user?.email || "",
+      countryCode: data.user?.countryCode || "",
+      phone: data.user?.phone || "",
+      // dob: data.user?.dob || "",
       location: data.user?.location || "",
       medium: data.user?.medium || "",
       experience: data.user?.experience || "",
       education: data.user?.education || "",
       portfolio: data.user?.portfolio || "",
-      // award: data.user?.award || "",
+      award: data.user?.award || "",
     });
     console.log(userInfo);
   };
@@ -78,14 +74,34 @@ export default function ArtistProfile() {
     handleGetUserInfo();
   }, [user]);
 
-  const [edit, setEdit] = useState(false);
-  const handleEdit = () => {
-    setEdit(!edit);
-  };
+  const form = useForm<UserInfo>({
+    defaultValues: userInfo,
+  });
+  // console.log(user);
 
+  const [edit, setEdit] = useState(false);
   const [editProfessional, setEditProfessional] = useState(false);
-  const handleEditProfessional = () => {
-    setEditProfessional(!editProfessional);
+
+  const handleSave = async () => {
+    if (!user) {
+      setEdit(false);
+      return;
+    }
+    // Get latest values from the form
+    const values = userInfo;
+    console.log("values", values);
+    const res = await updateUser(user.id, {
+      ...values,
+    });
+    console.log("res", res);
+    if (!res || res.error) {
+      // Optionally show error feedback here
+      setEdit(false);
+      return;
+    }
+    setUserInfo(values); // Update local state with saved values
+    setEdit(false);
+    setEditProfessional(false);
   };
 
   return (
@@ -99,8 +115,8 @@ export default function ArtistProfile() {
             </span>
           </div>
           <div>
-            <div className="font-semibold text-xl">{userInfo.name}</div>
-            <div className="text-gray-500 text-sm">{userInfo.email}</div>
+            <div className="font-semibold text-xl">{user?.name}</div>
+            <div className="text-gray-500 text-sm">{user?.email}</div>
           </div>
         </div>
 
@@ -113,7 +129,9 @@ export default function ArtistProfile() {
             type="button"
             variant="outline"
             size="icon"
-            onClick={handleEdit}
+            onClick={() => {
+              setEdit(!edit);
+            }}
           >
             {edit ? "Save" : "Edit"}
           </Button>
@@ -187,7 +205,7 @@ export default function ArtistProfile() {
                 </FormItem>
               )}
             />
-            <FormField
+            {/* <FormField
               name="email"
               control={form.control}
               render={({ field }) => (
@@ -200,33 +218,40 @@ export default function ArtistProfile() {
                   </FormControl>
                 </FormItem>
               )}
-            />
+            /> */}
             <FormItem className="flex flex-col md:flex-row md:items-center gap-2">
               <FormLabel className="text-sm text-gray-700 min-w-[110px]">
-                Mobile
+                phone
               </FormLabel>
               <div className="flex gap-2">
                 <FormControl>
                   <Input
                     {...form.register("countryCode")}
                     className="w-16"
-                    placeholder="+91"
+                    placeholder="+1"
+                    value={userInfo.countryCode}
+                    onChange={(e) =>
+                      setUserInfo({
+                        ...userInfo,
+                        countryCode: e.target.value,
+                      })
+                    }
                     disabled={!edit}
                   />
                 </FormControl>
                 <FormControl>
                   <Input
-                    {...form.register("mobile")}
+                    {...form.register("phone")}
                     disabled={!edit}
-                    value={userInfo.mobile}
+                    value={userInfo.phone}
                     onChange={(e) =>
-                      setUserInfo({ ...userInfo, mobile: e.target.value })
+                      setUserInfo({ ...userInfo, phone: e.target.value })
                     }
                   />
                 </FormControl>
               </div>
             </FormItem>
-            <FormField
+            {/* <FormField
               name="dob"
               control={form.control}
               render={({ field }) => (
@@ -252,7 +277,7 @@ export default function ArtistProfile() {
                   </FormControl>
                 </FormItem>
               )}
-            />
+            /> */}
             <FormField
               name="location"
               control={form.control}
@@ -284,7 +309,9 @@ export default function ArtistProfile() {
                 type="button"
                 variant="outline"
                 size="icon"
-                onClick={handleEditProfessional}
+                onClick={() => {
+                  setEditProfessional(!editProfessional);
+                }}
               >
                 {editProfessional ? "Save" : "Edit"}
               </Button>
@@ -410,16 +437,21 @@ export default function ArtistProfile() {
             </FormItem>
 
             {/* Actions */}
-            <div className="flex gap-3 mt-6">
-              <Button type="submit" variant="default">
-                Save Changes
-              </Button>
-              <Button type="button" variant="default">
-                Change Password
-              </Button>
-            </div>
           </form>
         </Form>
+        <div className="flex gap-3 mt-6">
+          <Button
+            onClick={() => {
+              handleSave();
+            }}
+            className={`${edit || editProfessional ? "" : "hidden"}`}
+          >
+            Save Changes
+          </Button>
+          <Button type="button" variant="default">
+            Change Password
+          </Button>
+        </div>
       </CardContent>
     </Card>
   );

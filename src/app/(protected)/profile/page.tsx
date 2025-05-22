@@ -6,20 +6,20 @@ import ArtistProfile from "@/components/profile/ArtistProfile";
 // import { useRouter } from "next/navigation";
 // import { useEffect } from "react";
 import ProfileComp from "@/components/profile/ProfileComp";
+import { useCurrentUser } from "@/hooks/useCurrentUser";
 
 
 export default function Profile() {
 
-  
+  const user = useCurrentUser();
 
-  // const user = useCurrentUser();
   // const router = useRouter();
 
   // useEffect(() => {
  
   // });
   // console.log(user);
-  const userRole = "artist"; // Replace with actual user role logic
+  const userRole = user?.role || ""; // Replace with actual user role logic
 
   return (
     <div className="w-full">
@@ -34,7 +34,7 @@ export default function Profile() {
       <p className="flex">email: {JSON.stringify(session.user?.email)}</p>
       <p className="flex">userType: {JSON.stringify(session.user?.userType)}</p>
       <LogoutButton /> */}
-      {userRole === "artist" ? <ArtistProfile /> : <ProfileComp />}
+      {userRole === "Artist" ? <ArtistProfile /> : <ProfileComp />}
     </div>
   );
 }
