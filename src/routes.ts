@@ -4,7 +4,8 @@
  */
 export const privateRoutes = [
     "/profile",
-    "/settings"
+    "/settings",
+    "/dashboard"
 ];
 
 /**
