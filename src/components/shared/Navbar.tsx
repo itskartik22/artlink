@@ -44,7 +44,7 @@ const Navbar = ({ session }: NavbarProps) => {
         {/* NavBar all device except mobile */}
         <div className="flex gap-3 items-center max-sm:hidden">
           <div>
-            <Link href="/gallery">Gallery</Link>
+            <Link href="/explore">Explore</Link>
           </div>
           <div>
             <Link href="/wishlist">Wishlist</Link>

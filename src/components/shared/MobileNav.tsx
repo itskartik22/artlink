@@ -29,13 +29,13 @@ const MobileNav = ({ loggedInStatus }: { loggedInStatus: boolean }) => {
                   <Link href="/profile"> Profile</Link>
                 </div>
 
-                <div className="flex p-2 shadow-md rounded-md w-full items-center">
-                  <Link href="/gallery">Gallery</Link>
+                <div className="flex p-2 rounded-md w-full items-center">
+                  <Link href="/explore">Explore</Link>
                 </div>
-                <div className="flex p-2 shadow-md rounded-md w-full items-center">
+                <div className="flex p-2 rounded-md w-full items-center">
                   <Link href="/wishlist">Wishlist</Link>
                 </div>
-                <div className="flex p-2 shadow-md rounded-md w-full items-center">
+                <div className="flex p-2 rounded-md w-full items-center">
                   <Link href="/cart">Cart</Link>
                 </div>
 
@@ -44,7 +44,7 @@ const MobileNav = ({ loggedInStatus }: { loggedInStatus: boolean }) => {
             ) : (
               <div className="gap-3 flex flex-col">
                 <div className="p-2">
-                  <Link href="/gallery">Gallery</Link>
+                  <Link href="/explore">Explore</Link>
                 </div>
                 <div className="p-2">
                   <Link href="/wishlist">Wishlist</Link>
