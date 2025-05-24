@@ -12,6 +12,7 @@ import {
   LuSettings,
   LuTrendingUp,
   LuChevronRight,
+  LuDollarSign,
 } from "react-icons/lu";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
