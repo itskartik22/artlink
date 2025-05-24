@@ -16,6 +16,8 @@ import { FaUserCircle } from "react-icons/fa";
 import { LogoutButton } from "../auth/logout-button";
 import MobileNav from "./MobileNav";
 import { Session } from "next-auth";
+import { useCart } from "@/context/CartContext";
+import { Badge } from "@/components/ui/badge";
 // import { useLoggedInStatus } from "@/hooks/login-status";
 // import { signOut } from "@/auth";
 
@@ -26,6 +28,7 @@ interface NavbarProps {
 
 const Navbar = ({ session }: NavbarProps) => {
   const loggedInStatus = !!session;
+  const { cartCount } = useCart();
 
   return (
     <nav className="flex justify-between z-50 w-[100%] gap-5 p-4 shadow-sm sm:px-12">
@@ -46,8 +49,16 @@ const Navbar = ({ session }: NavbarProps) => {
           <div>
             <Link href="/wishlist">Wishlist</Link>
           </div>
-          <div>
+          <div className="relative">
             <Link href="/cart">Cart</Link>
+            {cartCount > 0 && (
+              <Badge 
+                variant="secondary" 
+                className="absolute -top-3 -right-3 h-5 w-5 flex items-center justify-center rounded-full"
+              >
+                {cartCount}
+              </Badge>
+            )}
           </div>
 
           {loggedInStatus ? (

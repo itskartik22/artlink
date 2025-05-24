@@ -10,53 +10,64 @@ import {
 } from "@/components/ui/dialog";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import AddToCart from "@/components/cart/AddToCart";
 
 const artData = [
   {
+    id: "1",
     title: "Sketch",
     imageURL:
       "https://images.unsplash.com/flagged/photo-1572392640988-ba48d1a74457?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     ratio: "portrait",
     artist: "Kuber",
     price: 699,
+    stock: 5,
     description:
       "A graceful portrait capturing the elegance and poise of its subject with exquisite detail.",
   },
   {
+    id: "2",
     title: "Mystic Forest",
     imageURL:
       "https://cdna.artstation.com/p/assets/images/images/066/381/460/large/jeeva-artist-f4mno7qaeaaznwi.jpg?1692767040",
     ratio: "portrait",
     artist: "Artist",
     price: 849,
+    stock: 3,
     description:
       "An enchanting depiction of a forest bathed in mystical light, evoking a sense of wonder.",
   },
   {
+    id: "3",
     title: "Modern Abstract",
     imageURL: "/img/logo.jpeg",
     ratio: "square",
     artist: "Artist",
     price: 689,
+    stock: 8,
     description:
       "A striking abstract piece with bold colors and dynamic shapes, perfect for contemporary spaces.",
   },
   {
+    id: "4",
     title: "Vintage Portrait",
     imageURL:
       "https://media.istockphoto.com/id/478287701/photo/decorated-adobe-mud-wall.jpg?s=2048x2048&w=is&k=20&c=8ZjpfoBzkvslhhwJIZ4BRusAecJp1ifKgcYzS_AB1eI=",
     ratio: "square",
     artist: "Artist",
     price: 769,
+    stock: 2,
     description:
       "A vintage-style portrait that captures the essence of classical beauty and elegance.",
   },
   {
+    id: "5",
     title: "Cityscape",
     imageURL: "/img/artEye.png",
     ratio: "landscape",
     artist: "Artist",
     price: 715,
+    stock: 4,
     description:
       "A detailed cityscape illustration that showcases the bustling energy of urban life.",
   },
@@ -67,6 +78,7 @@ const artData = [
     ratio: "square",
     artist: "Ashutosh",
     price: 949,
+    stock: 0,
     description:
       "A stunning sketch of Taylor Swift, capturing her likeness with intricate details and finesse.",
   },
@@ -76,6 +88,7 @@ const artData = [
     ratio: "square",
     artist: "Artist",
     price: 669,
+    stock: 0,
     description:
       "A beautiful floral painting that brings the vibrant colors and delicate beauty of flowers to life.",
   },
@@ -86,6 +99,7 @@ const artData = [
     ratio: "portrait",
     artist: "Artist",
     price: 844,
+    stock: 0,
     description:
       "A playful and creative sketch merging Iron Man and Minion, perfect for fans of both characters.",
   },
@@ -96,6 +110,7 @@ const artData = [
     ratio: "portrait",
     artist: "Artist",
     price: 901,
+    stock: 0,
     description:
       "A modern abstract piece featuring geometric shapes and a harmonious blend of colors.",
   },
@@ -106,6 +121,7 @@ const artData = [
     ratio: "landscape",
     artist: "Artist",
     price: 623,
+    stock: 0,
     description:
       "A serene illustration of a mountain retreat, capturing the tranquility and beauty of nature.",
   },
@@ -116,6 +132,7 @@ const artData = [
     ratio: "portrait",
     artist: "Ashutosh",
     price: 976,
+    stock: 0,
     description:
       "A digital artwork that blends futuristic elements with a dreamlike atmosphere.",
   },
@@ -125,6 +142,7 @@ const artData = [
     ratio: "landscape",
     artist: "Artist",
     price: 636,
+    stock: 0,
     description:
       "A captivating landscape painting with golden hues, evoking a sense of warmth and tranquility.",
   },
@@ -135,6 +153,7 @@ const artData = [
     ratio: "landscape",
     artist: "Ashutosh",
     price: 761,
+    stock: 0,
     description:
       "An intricate sketch of an urban scene, capturing the hustle and bustle of city life.",
   },
@@ -144,6 +163,7 @@ const artData = [
     ratio: "landscape",
     artist: "Artist",
     price: 704,
+    stock: 0,
     description:
       "A thought-provoking abstract piece that invites viewers to interpret its layers of meaning.",
   },
@@ -154,6 +174,7 @@ const artData = [
     ratio: "portrait",
     artist: "Artist",
     price: 897,
+    stock: 0,
     description:
       "A dreamy landscape painting that transports viewers to a serene and otherworldly place.",
   },
@@ -163,6 +184,7 @@ const artData = [
     ratio: "square",
     artist: "Artist",
     price: 938,
+    stock: 0,
     description:
       "A modern portrait with a minimalist approach, highlighting the subject's unique features.",
   },
@@ -172,6 +194,7 @@ const artData = [
     ratio: "square",
     artist: "Ashutosh",
     price: 888,
+    stock: 0,
     description:
       "A vibrant artwork bursting with color and energy, perfect for adding a pop of excitement to any space.",
   },
@@ -182,6 +205,7 @@ const artData = [
     ratio: "portrait",
     artist: "Ashutosh",
     price: 913,
+    stock: 0,
     description:
       "A stunning sketch of Taylor Swift, capturing her likeness with intricate details and finesse. A graceful portrait capturing the elegance and poise of its subject with exquisite detail.",
   },
@@ -191,6 +215,7 @@ const artData = [
     ratio: "square",
     artist: "Ashutosh",
     price: 792,
+    stock: 0,
     description:
       "A serene scene capturing a peaceful moment in time, inviting viewers to pause and reflect.",
   },
@@ -200,6 +225,7 @@ const artData = [
     ratio: "square",
     artist: "Artist",
     price: 825,
+    stock: 0,
     description:
       "A bold and dynamic piece that makes a powerful statement with its striking design and colors.",
   },
@@ -212,9 +238,8 @@ const Gallery = () => {
         Art Gallery
       </div>
       <div className="columns-2 md:columns-3 lg:columns-4 xl:columns-5 items-center mx-8 max-sm:mx-4 mt-6">
-        {artData.map((art, index) => (
-          // eslint-disable-next-line
-          <Dialog key={index}>
+        {artData.map((art) => (
+          <Dialog key={art.id}>
             <DialogTrigger className="mb-4 w-full">
               <ArtCard
                 title={art.title}
@@ -239,18 +264,20 @@ const Gallery = () => {
                 <div className="flex lg:max-w-[50%] md:flex-grow flex-col child  p-2 text-white gap-2">
                   <DialogTitle className="flex flex-col gap-4 max-md:flex-row justify-between">
                     <h1>{art.title} </h1>
-                    <span className="hidden max-md:flex">Rs. {art.price}</span>
+                    <span className="hidden max-md:flex">₹{art.price}</span>
                   </DialogTitle>
                   <p className="text-gray-100 text-sm font-thin">
                     {art.description}
                   </p>
                   <p>Artist: {art.artist}</p>
                   <p className="max-md:hidden font-extrabold">
-                    Rs. {art.price}
+                    ₹{art.price}
                   </p>
-                  <Button className="w-full bg-white  text-gray-900 hover:text-white hover:shadow-inner hover:shadow-white">
-                    Add to Cart
-                  </Button>
+                  <AddToCart 
+                    productId={art.id}
+                    stock={art.stock}
+                    price={art.price}
+                  />
                   <div className="flex gap-2">
                     <Button className="w-1/2 bg-white  text-gray-900 hover:text-white hover:shadow-inner hover:shadow-white">
                       Wishlist
