@@ -5,23 +5,42 @@ import { prisma } from "@/lib/db";
 export async function POST(req: Request) {
   try {
     const session = await auth();
+
+    
     if (!session || !session.user) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
-
+    
     const user = await prisma.user.findUnique({
       where: { id: session.user.id },
-    });
+    })
+    console.log("reqk", user);
 
     if (!user || user.role !== "Artist") {
       return new NextResponse("Unauthorized", { status: 401 });
     }
 
     const body = await req.json();
-    const { name, description, price, stock, image } = body;
 
-    if (!name || !description || !price || stock === undefined || !image) {
+    console.log("body", body);
+    const { 
+      name, 
+      description, 
+      price, 
+      stock, 
+      images,
+      dimensions,
+      medium,
+      category,
+      style,
+    } = body;
+
+    if (!name || !description || !price || stock === undefined || !images || images.length === 0) {
       return new NextResponse("Missing required fields", { status: 400 });
+    }
+
+    if (images.length > 5) {
+      return new NextResponse("Maximum 5 images allowed", { status: 400 });
     }
 
     const product = await prisma.product.create({
@@ -30,7 +49,11 @@ export async function POST(req: Request) {
         description,
         price,
         stock,
-        image,
+        images,
+        dimensions,
+        medium,
+        category,
+        style,
         artistId: user.id,
       },
     });
