@@ -67,7 +67,7 @@ export default function ArtistProfile() {
       portfolio: data.user?.portfolio || "",
       award: data.user?.award || "",
     });
-    console.log(userInfo);
+    console.log("userInfo handleget", userInfo);
   };
 
   useEffect(() => {
@@ -132,8 +132,9 @@ export default function ArtistProfile() {
             onClick={() => {
               setEdit(!edit);
             }}
+            className={`${edit ? "font-extrabold" : ""}`}
           >
-            {edit ? "Save" : "Edit"}
+            {edit ? "X" : "Edit"}
           </Button>
           <div className="w-6 border-t border-gray-900" />
         </div>
@@ -312,8 +313,9 @@ export default function ArtistProfile() {
                 onClick={() => {
                   setEditProfessional(!editProfessional);
                 }}
+                className={`${editProfessional ? "font-extrabold" : ""}`}
               >
-                {editProfessional ? "Save" : "Edit"}
+                {editProfessional ? "X" : "Edit"}
               </Button>
               <div className="w-6 border-t border-gray-900" />
             </div>

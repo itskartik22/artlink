@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { LuPaintbrush, LuImage, LuPalette, LuUserCheck } from "react-icons/lu";
+import { Footer } from "@/components/shared/Footer";
 
 interface Product {
   id: string;
@@ -22,17 +23,20 @@ const features = [
   {
     icon: LuPaintbrush,
     title: "Custom Artwork",
-    description: "Get personalized artwork created just for you by talented artists",
+    description:
+      "Get personalized artwork created just for you by talented artists",
   },
   {
     icon: LuImage,
     title: "Digital & Traditional",
-    description: "Choose from a wide range of digital and traditional art styles",
+    description:
+      "Choose from a wide range of digital and traditional art styles",
   },
   {
     icon: LuPalette,
     title: "Various Mediums",
-    description: "Explore artwork in different mediums - from oils to watercolors",
+    description:
+      "Explore artwork in different mediums - from oils to watercolors",
   },
   {
     icon: LuUserCheck,
@@ -73,7 +77,7 @@ export default function Home() {
           />
         </div>
         <div className="relative z-10 text-center text-white px-4">
-          <motion.h1 
+          <motion.h1
             className="text-5xl md:text-6xl font-bold mb-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -81,13 +85,14 @@ export default function Home() {
           >
             Discover Unique Artworks
           </motion.h1>
-          <motion.p 
+          <motion.p
             className="text-xl mb-8 max-w-2xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            Connect with talented artists and find the perfect piece for your space
+            Connect with talented artists and find the perfect piece for your
+            space
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -104,7 +109,9 @@ export default function Home() {
       {/* Featured Products Section */}
       <section className="py-16 px-4 md:px-8 bg-gray-50">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12">Featured Artworks</h2>
+          <h2 className="text-3xl font-bold text-center mb-12">
+            Featured Artworks
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
             {featuredProducts.map((product) => (
               <motion.div
@@ -122,10 +129,14 @@ export default function Home() {
                 </div>
                 <div className="p-4">
                   <h3 className="font-semibold text-lg mb-2">{product.name}</h3>
-                  <p className="text-gray-600 text-sm mb-2">{product.description}</p>
+                  <p className="text-gray-600 text-sm mb-2">
+                    {product.description}
+                  </p>
                   <div className="flex justify-between items-center">
                     <span className="text-lg font-bold">₹{product.price}</span>
-                    <span className="text-sm text-gray-500">by {product.artist.name}</span>
+                    <span className="text-sm text-gray-500">
+                      by {product.artist.name}
+                    </span>
                   </div>
                 </div>
               </motion.div>
@@ -141,9 +152,9 @@ export default function Home() {
             <div>
               <h2 className="text-3xl font-bold mb-6">Get Custom Artwork</h2>
               <p className="text-gray-600 mb-8">
-                Looking for something unique? Commission our talented artists to create
-                custom artwork tailored to your vision. From portraits to landscapes,
-                bring your ideas to life.
+                Looking for something unique? Commission our talented artists to
+                create custom artwork tailored to your vision. From portraits to
+                landscapes, bring your ideas to life.
               </p>
               <div className="space-y-4">
                 {features.map((feature, index) => (
@@ -157,7 +168,9 @@ export default function Home() {
                     <feature.icon className="h-6 w-6 text-primary mt-1" />
                     <div>
                       <h3 className="font-semibold mb-1">{feature.title}</h3>
-                      <p className="text-gray-600 text-sm">{feature.description}</p>
+                      <p className="text-gray-600 text-sm">
+                        {feature.description}
+                      </p>
                     </div>
                   </motion.div>
                 ))}
@@ -183,8 +196,8 @@ export default function Home() {
         <div className="max-w-7xl mx-auto text-center">
           <h2 className="text-3xl font-bold mb-6">Join Our Artist Community</h2>
           <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
-            Are you an artist? Join our community to showcase your work, connect with art
-            lovers, and earn from your passion.
+            Are you an artist? Join our community to showcase your work, connect
+            with art lovers, and earn from your passion.
           </p>
           <div className="flex justify-center gap-4">
             <Button variant="outline" size="lg" asChild>
@@ -200,7 +213,9 @@ export default function Home() {
       {/* Categories Section */}
       <section className="py-16 px-4 md:px-8">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12">Browse by Category</h2>
+          <h2 className="text-3xl font-bold text-center mb-12">
+            Browse by Category
+          </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
               { name: "Paintings", image: "/img/category-paintings.jpg" },
@@ -220,13 +235,16 @@ export default function Home() {
                   className="object-cover"
                 />
                 <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-                  <h3 className="text-white text-xl font-semibold">{category.name}</h3>
+                  <h3 className="text-white text-xl font-semibold">
+                    {category.name}
+                  </h3>
                 </div>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
+      <Footer />
     </div>
   );
 }
