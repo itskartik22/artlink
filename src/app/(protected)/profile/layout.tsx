@@ -30,6 +30,7 @@ const Layout = ({ children }: LayoutProps) => {
     { category: "Notifications", link: "/profile/notifications" },
     { category: "Settings", link: "/profile/settings" },
     { category: "My Artworks", link: "/profile/artworks" },
+    { category: "Dashboard", link: "/dashboard" },
   ];
 
   const [sidebar, setSidebar] = useState(false);

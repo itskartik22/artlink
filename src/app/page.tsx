@@ -100,7 +100,7 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 0.4 }}
           >
             <Button size="lg" asChild>
-              <Link href="/gallery">Explore Gallery</Link>
+              <Link href="/explore">Explore</Link>
             </Button>
           </motion.div>
         </div>
