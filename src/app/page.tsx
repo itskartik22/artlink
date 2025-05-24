@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { LuPaintbrush, LuImage, LuPalette, LuUserCheck } from "react-icons/lu";
+import { Footer } from "@/components/shared/Footer";
 
 interface Product {
   id: string;
@@ -227,6 +228,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <Footer />
     </div>
   );
 }

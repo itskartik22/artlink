@@ -38,7 +38,7 @@ export default async function RootLayout({
             <div className="flex flex-col min-h-screen">
               <Navbar session={session} />
               <main className="flex-1">{children}</main>
-              <Footer />
+              {/* <Footer /> */}
             </div>
             <Toaster />
           </CartProvider>
