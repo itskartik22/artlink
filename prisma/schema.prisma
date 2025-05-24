@@ -60,6 +60,7 @@ model User {
   DeliveryAddress DeliveryAddress[]
 }
 
+
 model Account {
   userId            String
   type              String
@@ -87,8 +88,12 @@ model Product {
   description String?
   artistId    String
   price       Float
-  image       String?
+  images      String[]
   stock       Int
+  dimensions  Json?
+  medium      String?
+  category    String?
+  style       String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
