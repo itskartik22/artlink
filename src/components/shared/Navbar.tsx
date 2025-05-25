@@ -47,6 +47,9 @@ const Navbar = ({ session }: NavbarProps) => {
             <Link href="/explore">Explore</Link>
           </div>
           <div>
+            <Link href="/commissions">Commissions</Link>
+          </div>
+          <div>
             <Link href="/wishlist">Wishlist</Link>
           </div>
           <div className="relative">
@@ -65,7 +68,17 @@ const Navbar = ({ session }: NavbarProps) => {
             <div className="">
               <DropdownMenu>
                 <DropdownMenuTrigger>
-                  <FaUserCircle className="h-8 w-8" />
+                  {session.user.image ? (
+                    <Image
+                      src={session.user.image}
+                      alt="User Avatar"
+                      width={32}
+                      height={32}
+                      className="rounded-full ml-2"
+                    />
+                  ) : (
+                    <FaUserCircle className="h-8 w-8 text-gray-500 ml-2" />
+                  )}
                 </DropdownMenuTrigger>
                 <DropdownMenuContent
                   side="bottom"

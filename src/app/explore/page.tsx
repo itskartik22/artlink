@@ -336,7 +336,7 @@ const Explore = () => {
   return (
     <div className="flex flex-col items-center">
       <div className="flex justify-center font-extrabold w-full p-2 bg-gray-900 text-white">
-        Art Gallery
+        Explore Artworks
       </div>
       <div className="columns-2 md:columns-3 lg:columns-4 xl:columns-5 items-center mx-8 max-sm:mx-4 mt-6">
         {productData.map((product, index) => (

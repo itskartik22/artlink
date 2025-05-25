@@ -7,15 +7,16 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { LuPaintbrush, LuImage, LuPalette, LuUserCheck } from "react-icons/lu";
 import { Footer } from "@/components/shared/Footer";
+import { useCurrentUser } from "@/hooks/useCurrentUser";
 
 interface Product {
   id: string;
   name: string;
-  description: string;
+  description: string | null;
   price: number;
-  image: string;
+  images: string[]; // Prisma uses `String[]` for multiple images
   artist: {
-    name: string;
+    name: string | null;
   };
 }
 
@@ -47,6 +48,7 @@ const features = [
 
 export default function Home() {
   const [featuredProducts, setFeaturedProducts] = useState<Product[]>([]);
+  const user = useCurrentUser();
 
   useEffect(() => {
     const fetchFeaturedProducts = async () => {
@@ -70,7 +72,7 @@ export default function Home() {
       <section className="relative h-[80vh] flex items-center justify-center">
         <div className="absolute inset-0 z-0">
           <Image
-            src="/img/hero-bg.jpg"
+            src="https://images.unsplash.com/photo-1547891654-e66ed7ebb968?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             alt="Hero background"
             fill
             className="object-cover brightness-50"
@@ -121,12 +123,13 @@ export default function Home() {
               >
                 <div className="relative aspect-square">
                   <Image
-                    src={product.image}
+                    src={product.images[0] || "/img/login.jpeg"}
                     alt={product.name}
                     fill
                     className="object-cover"
                   />
                 </div>
+                {/* ye mera image <p>{product.image}</p> */}
                 <div className="p-4">
                   <h3 className="font-semibold text-lg mb-2">{product.name}</h3>
                   <p className="text-gray-600 text-sm mb-2">
@@ -181,7 +184,7 @@ export default function Home() {
             </div>
             <div className="relative h-[500px] rounded-lg overflow-hidden">
               <Image
-                src="/img/commission-art.jpg"
+                src="/img/login.jpeg"
                 alt="Commission artwork"
                 fill
                 className="object-cover"
@@ -193,21 +196,47 @@ export default function Home() {
 
       {/* Artist Showcase Section */}
       <section className="py-16 px-4 md:px-8 bg-gray-900 text-white">
-        <div className="max-w-7xl mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-6">Join Our Artist Community</h2>
-          <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
-            Are you an artist? Join our community to showcase your work, connect
-            with art lovers, and earn from your passion.
-          </p>
-          <div className="flex justify-center gap-4">
-            <Button variant="outline" size="lg" asChild>
-              <Link href="/register">Join as Artist</Link>
-            </Button>
-            <Button variant="secondary" size="lg" asChild>
-              <Link href="/about">Learn More</Link>
-            </Button>
-          </div>
-        </div>
+        {user ? (
+          <>
+            <div className="max-w-7xl mx-auto text-center">
+              <h2 className="text-3xl font-bold mb-6">
+                Welcome Back, {user.name}!
+              </h2>
+              <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
+                As a valued member of our community, you can showcase your
+                artwork, connect with art lovers, and earn from your passion.
+              </p>
+              <div className="flex justify-center gap-4 text-black">
+                <Button variant="secondary" size="lg" asChild>
+                  <Link href="/profile">Go to Profile</Link>
+                </Button>
+                <Button variant="secondary" size="lg" asChild>
+                  <Link href="/explore">Explore Artworks</Link>
+                </Button>
+              </div>
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="max-w-7xl mx-auto text-center">
+              <h2 className="text-3xl font-bold mb-6">
+                Join Our Artist Community
+              </h2>
+              <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
+                Are you an artist? Join our community to showcase your work,
+                connect with art lovers, and earn from your passion.
+              </p>
+              <div className="flex justify-center gap-4 text-black">
+                <Button variant="secondary" size="lg" asChild>
+                  <Link href="/signup">Join as Artist</Link>
+                </Button>
+                <Button variant="secondary" size="lg" asChild>
+                  <Link href="/about">Learn More</Link>
+                </Button>
+              </div>
+            </div>
+          </>
+        )}
       </section>
 
       {/* Categories Section */}
@@ -218,10 +247,26 @@ export default function Home() {
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
-              { name: "Paintings", image: "/img/category-paintings.jpg" },
-              { name: "Digital Art", image: "/img/category-digital.jpg" },
-              { name: "Sculptures", image: "/img/category-sculptures.jpg" },
-              { name: "Photography", image: "/img/category-photography.jpg" },
+              {
+                name: "Paintings",
+                image:
+                  "https://plus.unsplash.com/premium_photo-1678812165213-12dc8d1f3e19?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+              },
+              {
+                name: "Digital Art",
+                image:
+                  "https://plus.unsplash.com/premium_photo-1665657351417-84872c5ae575?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+              },
+              {
+                name: "Sculptures",
+                image:
+                  "https://images.unsplash.com/photo-1601887389937-0b02c26b602c?q=80&w=2127&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+              },
+              {
+                name: "Photography",
+                image:
+                  "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=1638&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+              },
             ].map((category, index) => (
               <motion.div
                 key={index}
