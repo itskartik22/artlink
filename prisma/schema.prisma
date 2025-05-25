@@ -19,6 +19,34 @@ enum UserRole {
   General
 }
 
+enum CommissionCategory {
+  Sketch
+  Painting
+  DigitalArt
+}
+
+enum CommissionStatus {
+  Pending
+  Accepted
+  InProgress
+  Completed
+  Rejected
+  Cancelled
+}
+
+enum ArtFormType {
+  Sketch
+  Painting
+  DigitalArt
+  Sculpture
+  Photography
+  MixedMedia
+  Illustration
+  Concept
+  Character
+  Animation
+}
+
 model User {
   id              String    @id @default(uuid())
   name            String?
@@ -58,6 +86,10 @@ model User {
   Wishlist        Wishlist[]
   Product         Product[]
   DeliveryAddress DeliveryAddress[]
+  clientCommissions Commission[] @relation("ClientCommissions")
+  artistCommissions Commission[] @relation("ArtistCommissions")
+  proposals        CommissionProposal[]
+  commissionSettings ArtistCommissionSettings?
 }
 
 
@@ -167,4 +199,87 @@ model DeliveryAddress {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
+}
+
+model Commission {
+  id          String            @id @default(uuid())
+  title       String
+  description String
+  category    CommissionCategory
+  budget      Float
+  deadline    DateTime
+  status      CommissionStatus  @default(Pending)
+  clientId    String
+  artistId    String?
+  reference   String[]          // Reference images
+  requirements String
+  size        String?
+  medium      String?
+  style       String?
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+
+  client      User              @relation("ClientCommissions", fields: [clientId], references: [id], onDelete: Cascade)
+  artist      User?             @relation("ArtistCommissions", fields: [artistId], references: [id], onDelete: SetNull)
+  proposals   CommissionProposal[]
+}
+
+model CommissionProposal {
+  id           String    @id @default(uuid())
+  commissionId String
+  artistId     String
+  price        Float
+  timeframe    Int       // In days
+  description  String
+  status       String    @default("pending") // pending, accepted, rejected
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  commission   Commission @relation(fields: [commissionId], references: [id], onDelete: Cascade)
+  artist       User      @relation(fields: [artistId], references: [id], onDelete: Cascade)
+}
+
+model ArtistCommissionSettings {
+  id                String      @id @default(uuid())
+  userId           String      @unique
+  isAcceptingCommissions Boolean @default(true)
+  basePrice        Float
+  pricePerHour     Float?
+  minimumPrice     Float
+  maximumPrice     Float?
+  currency         String      @default("INR")
+  turnaroundDays   Int         @default(7)
+  artForms         ArtForm[]
+  tags             ArtistTag[]
+  description      String?
+  termsAndConditions String?
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
+
+  user             User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model ArtForm {
+  id                  String    @id @default(uuid())
+  type                ArtFormType
+  price               Float?    // Additional price for this art form
+  description         String?
+  estimatedDays      Int?      // Estimated days for this art form
+  artistSettingsId    String
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
+  artistSettings      ArtistCommissionSettings @relation(fields: [artistSettingsId], references: [id], onDelete: Cascade)
+}
+
+model ArtistTag {
+  id                  String    @id @default(uuid())
+  name                String
+  artistSettingsId    String
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
+  artistSettings      ArtistCommissionSettings @relation(fields: [artistSettingsId], references: [id], onDelete: Cascade)
+
+  @@unique([name, artistSettingsId])
 }
