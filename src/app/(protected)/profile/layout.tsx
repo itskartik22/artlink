@@ -29,7 +29,6 @@ const Layout = ({ children }: LayoutProps) => {
     { category: "Payment info", link: "/profile/payments/info" },
     { category: "Notifications", link: "/profile/notifications" },
     { category: "Settings", link: "/profile/settings" },
-    { category: "My Artworks", link: "/profile/artworks" },
     { category: "Dashboard", link: "/dashboard" },
   ];
 
