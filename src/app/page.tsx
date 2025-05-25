@@ -179,7 +179,7 @@ export default function Home() {
                 ))}
               </div>
               <Button className="mt-8" size="lg" asChild>
-                <Link href="/commission">Start Commission</Link>
+                <Link href="/commissions">Start Commission</Link>
               </Button>
             </div>
             <div className="relative h-[500px] rounded-lg overflow-hidden">

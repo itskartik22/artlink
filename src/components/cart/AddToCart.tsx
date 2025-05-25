@@ -24,9 +24,13 @@ interface AddToCartProps {
 const AddToCart = ({ productId, stock, price }: AddToCartProps) => {
   const { toast } = useToast();
   const user = useCurrentUser();
-  const { refreshCart } = useCart();
+  const { refreshCart, cartItems } = useCart();
   const [quantity, setQuantity] = useState("1");
   const [isLoading, setIsLoading] = useState(false);
+
+  // Find if the product is already in cart
+  const existingCartItem = cartItems.find(item => item.productId === productId);
+  const availableStock = stock - (existingCartItem?.quantity || 0);
 
   const handleAddToCart = async () => {
     if (!user) {
@@ -38,10 +42,11 @@ const AddToCart = ({ productId, stock, price }: AddToCartProps) => {
       return;
     }
 
-    if (user.role !== "General") {
+    const selectedQuantity = parseInt(quantity);
+    if (selectedQuantity > availableStock) {
       toast({
-        title: "Access Denied",
-        description: "Only general users can add items to cart",
+        title: "Error",
+        description: "Not enough stock available",
         variant: "destructive",
       });
       return;
@@ -49,7 +54,11 @@ const AddToCart = ({ productId, stock, price }: AddToCartProps) => {
 
     try {
       setIsLoading(true);
-      const result = await addToCart(user.id, productId, parseInt(quantity));
+      console.log("user.id", user.id);
+      console.log("productId", productId);
+      console.log("selectedQuantity", selectedQuantity);  
+      const result = await addToCart(user.id, productId, selectedQuantity);
+      console.log("result", result);
 
       if ("error" in result) {
         toast({
@@ -77,8 +86,9 @@ const AddToCart = ({ productId, stock, price }: AddToCartProps) => {
     }
   };
 
-  const quantityOptions = Array.from({ length: stock }, (_, i) =>
-    (i + 1).toString()
+  const quantityOptions = Array.from(
+    { length: Math.min(availableStock, 10) },
+    (_, i) => (i + 1).toString()
   );
 
   return (
@@ -90,14 +100,14 @@ const AddToCart = ({ productId, stock, price }: AddToCartProps) => {
           </SelectTrigger>
           <SelectContent>
             {quantityOptions.map((value) => (
-              <SelectItem key={value} value={value} >
+              <SelectItem key={value} value={value}>
                 {value}
               </SelectItem>
             ))}
           </SelectContent>
         </Select>
         <span className="text-sm text-muted-foreground">
-          {stock} pieces available
+          {availableStock} pieces available
         </span>
       </div>
       <div className="flex gap-2 items-center">
@@ -108,9 +118,9 @@ const AddToCart = ({ productId, stock, price }: AddToCartProps) => {
       <Button
         className="w-full"
         onClick={handleAddToCart}
-        disabled={isLoading || stock === 0}
+        disabled={isLoading || availableStock === 0}
       >
-        {isLoading ? "Adding..." : stock === 0 ? "Out of Stock" : "Add to Cart"}
+        {isLoading ? "Adding..." : availableStock === 0 ? "Out of Stock" : "Add to Cart"}
       </Button>
     </div>
   );

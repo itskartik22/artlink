@@ -85,3 +85,21 @@ export async function deleteProduct(productId: string) {
     return { error: "Error deleting product." };
   }
 }
+
+// get all products
+export async function getAllProducts() {
+  try {
+    const products = await prisma.product.findMany({
+      include: {
+        likes: true,
+      },
+    });
+    return { products: products.map(product => ({
+      ...product,
+      likes: product.likes || []
+    })) };
+  } catch (error) {
+    console.error("Error fetching products:", error);
+    return { error: "Failed to fetch products" };
+  }
+}

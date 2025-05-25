@@ -61,3 +61,15 @@ export async function deleteUser(userId: string) {
   }
 }
 
+// get username by id
+export async function getUsernameById(userId: string) {
+  const user = await prisma.user.findUnique({
+    where: {
+      id: userId,
+    },
+    select: {
+      username: true
+    }
+  });
+  return { username: user?.username || "" };
+}

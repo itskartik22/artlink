@@ -9,9 +9,11 @@ interface CartItem {
   productId: string;
   quantity: number;
   product: {
+    id: string;
     name: string;
     price: number;
-    image: string | null;
+    images: string[];
+    stock: number;
   };
 }
 
@@ -48,11 +50,16 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
       setIsLoading(true);
       const result = await getCart(user.id);
       
-      if (!("error" in result)) {
-        setCartItems(result);
+      if ("error" in result) {
+        console.error("Error fetching cart:", result.error);
+        setCartItems([]);
+        return;
       }
+
+      setCartItems(result);
     } catch (error) {
       console.error("Failed to fetch cart:", error);
+      setCartItems([]);
     } finally {
       setIsLoading(false);
     }
