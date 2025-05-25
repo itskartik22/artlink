@@ -3,20 +3,24 @@ import React from "react";
 import { Badge } from "@/components/ui/badge";
 import { FcLike } from "react-icons/fc";
 
-interface Props {
+interface ArtCardProps {
   title: string;
   imageURL: string;
   artistId: string;
   ratio?: string;
-  likes: number;
+  likes: {
+    id: string;
+    userId: string;
+    productId: string;
+  }[];
 }
 
-const ArtCard = ({ title, imageURL, ratio, artistId, likes }: Props) => {
-  // const aspectRatioClasses = {
-  //   square: "aspect-square",
-  //   portrait: "aspect-[4/5]",
-  //   landscape: "aspect-[3/2]",
-  // };
+const ArtCard = ({ title, imageURL, ratio, artistId, likes }: ArtCardProps) => {
+  const aspectRatioClasses = {
+    square: "aspect-square",
+    portrait: "aspect-[4/5]",
+    landscape: "aspect-[3/2]",
+  };
 
   return (
     <div
@@ -38,7 +42,7 @@ const ArtCard = ({ title, imageURL, ratio, artistId, likes }: Props) => {
           className="flex gap-1 justify-center items-center shadow-inner"
           variant="outline"
         >
-          {likes}
+          {likes.length}
           <FcLike />
         </Badge>
       </div>
