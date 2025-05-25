@@ -12,10 +12,13 @@ import {
   LuSettings,
   LuTrendingUp,
   LuChevronRight,
+  LuDollarSign,
 } from "react-icons/lu";
+import { RxAvatar } from "react-icons/rx";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import { useCurrentUser } from "@/hooks/useCurrentUser";
 
 const sidebarLinks = [
   {
@@ -53,9 +56,15 @@ const sidebarLinks = [
     href: "/dashboard/settings",
     icon: LuSettings,
   },
+  {
+    title: "Profile",
+    href: "/profile",
+    icon: RxAvatar,
+  }
 ];
 
 export function DashboardSidebar() {
+  const user = useCurrentUser();
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -103,7 +112,7 @@ export function DashboardSidebar() {
       {/* User Info */}
       <div className="border-t border-indigo-900/50 p-4 mt-auto">
         <p className="text-sm text-gray-400">Signed in as</p>
-        <p className="text-sm font-medium text-gray-100">artist@example.com</p>
+        <p className="text-sm font-medium text-gray-100">{user?.email}</p>
       </div>
     </div>
   );

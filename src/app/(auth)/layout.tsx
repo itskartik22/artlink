@@ -5,8 +5,8 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="w-screen h-screen flex justify-center">
-      <div className="md:w-1/2 w-full flex justify-center">{children}</div>
+    <div className="w-full px-10 flex justify-center">
+      <div className="w-full flex justify-center">{children}</div>
     </div>
   );
 }
