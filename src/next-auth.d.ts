@@ -1,18 +1,18 @@
-import { JWT } from "next-auth/jwt"
+// import { JWT } from "next-auth/jwt"
 import { type DefaultSession } from "next-auth"
 import { UserRole } from "./lib/models/User"
 
 
-declare module "next-auth/jwt" {
+// declare module "next-auth/jwt" {
   /** Returned by the jwt callback and getToken, when using JWT sessions */
-  interface JWT {
-    /** OpenID ID Token */
-    id: string
-    role: UserRole | null
-    profileSetup: boolean
+  // interface JWT {
+  //   /** OpenID ID Token */
+  //   id: string
+  //   role: UserRole | null
+  //   profileSetup: boolean
 
-  }
-}
+  // }
+// }
 
 declare module "next-auth" {
   /**

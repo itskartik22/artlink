@@ -15,7 +15,7 @@ import {
   LuDollarSign,
 } from "react-icons/lu";
 import { RxAvatar } from "react-icons/rx";
-import { Button } from "@/components/ui/button";
+// import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useCurrentUser } from "@/hooks/useCurrentUser";

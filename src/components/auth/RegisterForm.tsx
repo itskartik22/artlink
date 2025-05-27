@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
+  // FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -18,25 +18,26 @@ import {
 import {
   InputOTP,
   InputOTPGroup,
-  InputOTPSeparator,
+  // InputOTPSeparator,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
 import { Input } from "@/components/ui/input";
 import { RegisterSchema } from "@/lib/definitions";
 import { useState, useTransition } from "react";
 import { register } from "@/actions/register";
-import FormSuccess from "../FormSuccess";
+// import FormSuccess from "../FormSuccess";
 import FormError from "../FormError";
 
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
-import { signIn } from "@/auth";
+// import { signIn } from "@/auth";
 import { otpLogin } from "@/actions/login";
 
 export function SignupForm() {
   const [error, setError] = useState<string | undefined>(undefined);
   const [success, setSuccess] = useState<string | undefined>(undefined);
-  const [isPending, setTransition] = useTransition();
+  console.log(error, success);
+  // const [isPending, setTransition] = useTransition();
   const router = useRouter();
   const form = useForm<z.infer<typeof RegisterSchema>>({
     resolver: zodResolver(RegisterSchema),
@@ -69,6 +70,7 @@ export function SignupForm() {
           activeStatus: true,
         });
         setSuccess(data?.success);
+        
       }
     });
   };

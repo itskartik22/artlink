@@ -13,7 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { SelectLabel } from "@radix-ui/react-select";
+// import { SelectLabel } from "@radix-ui/react-select";
 
 interface AddToCartProps {
   productId: string;

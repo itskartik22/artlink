@@ -21,7 +21,7 @@ import { login } from "@/actions/login";
 import { usePathname, useRouter } from "next/navigation";
 
 export default function LoginForm() {
-  const [isPending, setTransition] = useTransition();
+  // const [isPending, setTransition] = useTransition();
   const [success, setSuccess] = useState<string | undefined>(undefined);
   const [error, setError] = useState<string | undefined>(undefined);
   const router = useRouter();

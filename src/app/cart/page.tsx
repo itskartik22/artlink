@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/context/CartContext";
 import Image from "next/image";
@@ -12,7 +12,7 @@ import { useCurrentUser } from "@/hooks/useCurrentUser";
 import {
   Card,
   CardContent,
-  CardDescription,
+  // CardDescription,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -51,7 +51,7 @@ const Cart = () => {
     } catch (error) {
       toast({
         title: "Error",
-        description: "Failed to update quantity",
+        description: "Failed to update quantity" + error,
         variant: "destructive",
       });
     } finally {
@@ -79,7 +79,7 @@ const Cart = () => {
     } catch (error) {
       toast({
         title: "Error",
-        description: "Failed to remove item",
+        description: "Failed to remove item" + error,
         variant: "destructive",
       });
     } finally {
@@ -108,7 +108,7 @@ const Cart = () => {
     } catch (error) {
       toast({
         title: "Error",
-        description: "Failed to clear cart",
+        description: "Failed to clear cart" + error,
         variant: "destructive",
       });
     } finally {

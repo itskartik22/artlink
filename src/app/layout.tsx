@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
-import { Inter, Merriweather_Sans } from "next/font/google";
+import {  Merriweather_Sans } from "next/font/google";
+// import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/shared/Navbar";
 import { SessionProvider } from "next-auth/react";
 import { auth } from "@/auth";
 import { Toaster } from "@/components/ui/sonner";
-import { AuthProvider } from "@/components/AuthProvider";
+// import { AuthProvider } from "@/components/AuthProvider";
 import { CartProvider } from "@/context/CartContext";
-import { Footer } from "@/components/shared/Footer";
+// import { Footer } from "@/components/shared/Footer";
 // const inter = Inter({ subsets: ["latin"] });
 const merriWeather = Merriweather_Sans({
   weight: ["400", "700", "800"],

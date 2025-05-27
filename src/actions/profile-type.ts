@@ -18,6 +18,6 @@ export const setProfileType = async (type: UserRole) => {
 
     return { success: "Profile Type set successfully" };
   } catch (error) {
-    return { error: "Something went wrong!" };
+    return { error: "Something went wrong!" + error };
   }
 };

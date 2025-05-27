@@ -1,11 +1,11 @@
 import { SignupForm } from "../../../components/auth/RegisterForm";
-import { Inter } from "next/font/google";
+// import { Inter } from "next/font/google";
 import { FcGoogle } from "react-icons/fc";
 import Link from "next/link";
 import { signIn } from "@/auth";
 import Image from "next/image";
 
-const inter = Inter({ subsets: ["latin"] });
+// const inter = Inter({ subsets: ["latin"] });
 
 export default function page() {
   return (

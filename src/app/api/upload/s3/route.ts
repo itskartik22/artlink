@@ -67,8 +67,8 @@ export async function POST(req: Request) {
 }
 
 // Increase payload size limit for the route
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-}; 
+// export const config = {
+//   api: {
+//     bodyParser: false,
+//   },
+// }; 

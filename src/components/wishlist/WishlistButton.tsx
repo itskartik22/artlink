@@ -62,6 +62,7 @@ const WishlistButton = ({ productId, className }: WishlistButtonProps) => {
           : "Item has been removed from your wishlist",
       });
     } catch (error) {
+      console.log(error);
       toast({
         title: "Error",
         description: "Failed to update wishlist",

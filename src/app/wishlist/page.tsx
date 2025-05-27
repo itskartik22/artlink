@@ -47,7 +47,7 @@ const WishlistPage = () => {
       } catch (error) {
         toast({
           title: "Error",
-          description: "Failed to fetch wishlist items",
+          description: "Failed to fetch wishlist items" + error,
           variant: "destructive",
         });
       } finally {
@@ -80,7 +80,7 @@ const WishlistPage = () => {
     } catch (error) {
       toast({
         title: "Error",
-        description: "Failed to remove item",
+        description: "Failed to remove item" + error,
         variant: "destructive",
       });
     }

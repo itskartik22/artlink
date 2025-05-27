@@ -127,6 +127,9 @@ model Product {
   medium      String?
   category    String?
   style       String?
+  status      String   @default("pending")
+  rejectionReason String?
+  isVerified  Boolean  @default(false)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
@@ -158,6 +161,8 @@ model Order {
   productId String
   quantity  Int      @default(1)
   paymentId String?
+  status    String   @default("pending")
+  totalAmount Float  @default(0)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 

@@ -76,8 +76,20 @@ const statusColors = {
   Rejected: "bg-orange-100 text-orange-800",
 };
 
+interface Commission {
+  id: string;
+  title: string;
+  description: string;
+  category: string;
+  budget: number;
+  deadline: string;
+  status: string;
+  client: { name: string; email?: string; image?: string };
+  // Add other fields as needed
+}
+
 export default function CommissionManagementPage() {
-  const [commissions, setCommissions] = useState([]);
+  const [commissions, setCommissions] = useState<Commission[]>([]);
   const [loading, setLoading] = useState(true);
   const [settings, setSettings] = useState<CommissionSettings>(defaultSettings);
   const [newTag, setNewTag] = useState("");
@@ -216,7 +228,7 @@ export default function CommissionManagementPage() {
             <div className="space-y-0.5">
               <Label>Accepting Commissions</Label>
               <p className="text-sm text-muted-foreground">
-                Toggle whether you're currently accepting new commission requests
+                Toggle whether you&apos;re currently accepting new commission requests
               </p>
             </div>
             <Switch
@@ -421,7 +433,7 @@ export default function CommissionManagementPage() {
                     </TableCell>
                     <TableCell>
                       <Badge
-                        className={statusColors[commission.status]}
+                        className={statusColors[commission.status as keyof typeof statusColors] || ""}
                       >
                         {commission.status}
                       </Badge>

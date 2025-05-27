@@ -10,7 +10,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
+// import { Button } from "@/components/ui/button";
 import AddToCart from "@/components/cart/AddToCart";
 import { getAllProducts } from "@/actions/productAction";
 import LikeButton from "@/components/like/LikeButton";

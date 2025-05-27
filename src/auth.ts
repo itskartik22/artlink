@@ -1,4 +1,4 @@
-import NextAuth, { type DefaultSession } from "next-auth";
+import NextAuth from "next-auth";
 import authConfig from "./auth.config";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { getUserById } from "./lib/getUserById";
@@ -12,9 +12,9 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
   callbacks: {
     async session({ session, token }) {
       if (token) {
-        session.user.id = token.id;
-        session.user.role = token.role;
-        session.user.profileSetup = token.profileSetup;
+        session.user.id = token.id as string;
+        session.user.role = token.role as string;
+        session.user.profileSetup = token.profileSetup as boolean;
       }
       return session;
     },
