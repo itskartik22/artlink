@@ -35,10 +35,17 @@ const formSchema = z.object({
   city: z.string().min(1, "City is required"),
   state: z.string().min(1, "State is required"),
   zipCode: z.string().min(1, "ZIP code is required"),
-  cardNumber: z.string().min(16, "Card number must be 16 digits"),
-  expiryDate: z.string().min(5, "Invalid expiry date"),
-  cvv: z.string().min(3, "CVV must be 3 digits"),
 });
+
+const loadRazorpay = () => {
+  return new Promise<boolean>((resolve) => {
+    const script = document.createElement("script");
+    script.src = "https://checkout.razorpay.com/v1/checkout.js";
+    script.onload = () => resolve(true);
+    script.onerror = () => resolve(false);
+    document.body.appendChild(script);
+  });
+};
 
 const Checkout = () => {
   const { cartItems, cartTotal, refreshCart } = useCart();
@@ -57,9 +64,6 @@ const Checkout = () => {
       city: "",
       state: "",
       zipCode: "",
-      cardNumber: "",
-      expiryDate: "",
-      cvv: "",
     },
   });
 
@@ -73,28 +77,86 @@ const Checkout = () => {
       return;
     }
 
-    console.log(values);
-
     try {
       setIsLoading(true);
-      // Here you would typically integrate with a payment processor
-      // For now, we'll just simulate a successful payment
-      await new Promise((resolve) => setTimeout(resolve, 2000));
 
-      // Clear the cart after successful payment
-      await clearCart(user.id);
-      await refreshCart();
+      // Load Razorpay script
+      const isLoaded = await loadRazorpay();
+      if (!isLoaded) {
+        throw new Error("Razorpay SDK failed to load");
+      }
 
-      toast({
-        title: "Order placed successfully",
-        description: "Thank you for your purchase!",
+      // Create order
+      const response = await fetch("/api/razorpay", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          amount: cartTotal * 1.18, // Including tax
+          items: cartItems,
+        }),
       });
 
-      router.push("/orders");
+      if (!response.ok) {
+        throw new Error("Failed to create order");
+      }
+
+      const data = await response.json();
+
+      // Initialize Razorpay payment
+      const options = {
+        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+        amount: data.amount,
+        currency: data.currency,
+        name: "Artlink",
+        description: "Payment for your order",
+        order_id: data.orderId,
+        prefill: {
+          name: values.fullName,
+          email: values.email,
+          contact: values.phone,
+        },
+        handler: async function (response: any) {
+          try {
+            // Payment successful
+            toast({
+              title: "Payment successful",
+              description: "Your order has been placed successfully!",
+            });
+            
+            // Clear cart and redirect to orders page
+            await clearCart(user.id);
+            await refreshCart();
+            router.push("/profile/orders");
+          } catch (error) {
+            console.error("Error processing payment:", error);
+            toast({
+              title: "Error",
+              description: "There was an error processing your payment",
+              variant: "destructive",
+            });
+          }
+        },
+        modal: {
+          ondismiss: function() {
+            toast({
+              title: "Payment cancelled",
+              description: "You cancelled the payment",
+              variant: "destructive",
+            });
+            setIsLoading(false);
+          },
+        },
+      };
+
+      const razorpay = new (window as any).Razorpay(options);
+      razorpay.open();
     } catch (error) {
+      console.error("Checkout error:", error);
       toast({
         title: "Error",
-        description: "Failed to process payment" + error,
+        description: "Failed to process payment: " + error,
         variant: "destructive",
       });
     } finally {
@@ -227,53 +289,6 @@ const Checkout = () => {
                           </FormItem>
                         )}
                       />
-                    </div>
-                  </div>
-
-                  <div className="space-y-4">
-                    <h3 className="text-lg font-semibold">Payment Information</h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <FormField
-                        control={form.control}
-                        name="cardNumber"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Card Number</FormLabel>
-                            <FormControl>
-                              <Input placeholder="1234 5678 9012 3456" {...field} />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                      <div className="grid grid-cols-2 gap-4">
-                        <FormField
-                          control={form.control}
-                          name="expiryDate"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Expiry Date</FormLabel>
-                              <FormControl>
-                                <Input placeholder="MM/YY" {...field} />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                        <FormField
-                          control={form.control}
-                          name="cvv"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>CVV</FormLabel>
-                              <FormControl>
-                                <Input placeholder="123" {...field} />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                      </div>
                     </div>
                   </div>
 

@@ -169,7 +169,8 @@ model Order {
   user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
 
-  @@unique([userId, productId])
+  @@index([userId])
+  @@index([productId])
 }
 
 model Wishlist {
