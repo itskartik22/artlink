@@ -7,7 +7,7 @@ import {
   LuShoppingCart,
   LuPaintbrush,
 } from "react-icons/lu";
-import { useState } from "react";
+// import { useState } from "react";
 
 const stats = [
   {
@@ -42,7 +42,7 @@ export default function DashboardPage() {
       <div>
         <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
         <p className="text-muted-foreground">
-          Welcome back! Here's an overview of your store
+          Welcome back! Here&apos;s an overview of your store
         </p>
       </div>
 

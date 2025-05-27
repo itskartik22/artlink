@@ -73,6 +73,8 @@ const Checkout = () => {
       return;
     }
 
+    console.log(values);
+
     try {
       setIsLoading(true);
       // Here you would typically integrate with a payment processor
@@ -92,7 +94,7 @@ const Checkout = () => {
     } catch (error) {
       toast({
         title: "Error",
-        description: "Failed to process payment",
+        description: "Failed to process payment" + error,
         variant: "destructive",
       });
     } finally {

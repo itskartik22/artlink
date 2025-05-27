@@ -23,7 +23,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { LuX } from "react-icons/lu";
 import S3UploadImage from "@/components/upload/S3UploadImage";
@@ -80,7 +80,7 @@ interface ProductFormProps {
 }
 
 export default function ProductForm({ onSuccess }: ProductFormProps) {
-  const router = useRouter();
+  // const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [imageUrls, setImageUrls] = useState<string[]>([]);
 
@@ -148,7 +148,7 @@ export default function ProductForm({ onSuccess }: ProductFormProps) {
       form.reset();
       setImageUrls([]);
     } catch (error) {
-      toast.error("Something went wrong");
+      toast.error("Something went wrong" + error);
     } finally {
       setLoading(false);
     }

@@ -22,7 +22,7 @@ export async function login(formData: z.infer<typeof LoginSchema>) {
     // revalidatePath("/");
     return { success: "Login successfully." };
   } catch (error) {
-      return { error: "Something went wrong!" };
+      return { error: "Something went wrong!" + error };
     // console.error(error);
     // if (error instanceof AuthError) {
     //   switch (error) {

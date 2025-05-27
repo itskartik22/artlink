@@ -1,16 +1,16 @@
 "use client";
 import { RiShieldUserFill } from "react-icons/ri";
 import { FaPaintBrush } from "react-icons/fa";
-import { BiSolidPurchaseTag } from "react-icons/bi";
+// import { BiSolidPurchaseTag } from "react-icons/bi";
 import { setProfileType } from "@/actions/profile-type";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { UserRole } from "@prisma/client";
-import { useCurrentUser } from "@/hooks/useCurrentUser";
+// import { useCurrentUser } from "@/hooks/useCurrentUser";
 
 const ProfileType = () => {
   const router = useRouter();
-  const user = useCurrentUser();
+  // const user = useCurrentUser();
 
   const handleProfileTypeOption = (type: UserRole) => {
     setProfileType(type).then((res) => {

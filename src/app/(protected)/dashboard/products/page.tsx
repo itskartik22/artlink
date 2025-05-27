@@ -62,7 +62,7 @@ export default function ProductsPage() {
       });
       setCurrentImageIndexes(indexes);
     } catch (error) {
-      toast.error("Failed to load products");
+      toast.error("Failed to load products" + error);
     } finally {
       setLoading(false);
     }
@@ -85,7 +85,7 @@ export default function ProductsPage() {
       toast.success("Product deleted successfully");
       fetchProducts();
     } catch (error) {
-      toast.error("Failed to delete product");
+      toast.error("Failed to delete product" + error);
     }
   };
 

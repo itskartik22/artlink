@@ -67,6 +67,7 @@ const LikeButton = ({ productId, className }: LikeButtonProps) => {
       setIsLikedState(result.liked);
       setLikesCount((prev) => (result.liked ? prev + 1 : prev - 1));
     } catch (error) {
+      console.log(error);
       toast({
         title: "Error",
         description: "Failed to update like status",

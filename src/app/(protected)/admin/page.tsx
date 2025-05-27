@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Overview, UsersTable, ArtworkVerification, OrdersTable } from "@/components/admin";
-import { prisma } from "@/lib/db";
+// import { prisma } from "@/lib/db";
 
 export default function AdminDashboard() {
   return (

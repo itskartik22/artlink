@@ -1,15 +1,15 @@
 import React from "react";
-import { Inter } from "next/font/google";
+// import { Inter } from "next/font/google";
 import LoginForm from "@/components/auth/LoginForm";
 import { FcGoogle } from "react-icons/fc";
 import Link from "next/link";
 import { auth, signIn } from "@/auth";
-import { useRouter } from "next/navigation";
-import { NextResponse } from "next/server";
+// import { useRouter } from "next/navigation";
+// import { NextResponse } from "next/server";
 import { redirect } from "next/navigation";
 import Image from "next/image";
 
-const inter = Inter({ subsets: ["latin"] });
+// const inter = Inter({ subsets: ["latin"] });
 
 export default async function Page() {
   const session = await auth();

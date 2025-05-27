@@ -17,11 +17,11 @@ interface ArtCardProps {
 }
 
 const ArtCard = ({ title, imageURL, ratio, artistId, likes }: ArtCardProps) => {
-  const aspectRatioClasses = {
-    square: "aspect-square",
-    portrait: "aspect-[4/5]",
-    landscape: "aspect-[3/2]",
-  };
+  // const aspectRatioClasses = {
+  //   square: "aspect-square",
+  //   portrait: "aspect-[4/5]",
+  //   landscape: "aspect-[3/2]",
+  // };
   const [username, setUsername] = useState<string>("");
   useEffect(() => {
     const fetchUsername = async () => {

@@ -1,5 +1,5 @@
 "use server";
-import { signIn } from "@/auth";
+// import { signIn } from "@/auth";
 import { sendOTP } from "@/lib/mail";
 import { prisma } from "@/lib/db";
 import { RegisterSchema } from "@/lib/definitions";

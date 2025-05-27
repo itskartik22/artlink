@@ -5,13 +5,15 @@ import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
-  CardDescription,
+  // CardDescription,
   CardHeader,
   CardTitle,
   CardFooter,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent, 
+  // DialogTrigger
+ } from "@/components/ui/dialog";
 import CommissionForm from "@/components/forms/CommissionForm";
 import { useRouter } from "next/navigation";
 import { LuPencil, LuImage, LuMonitor, LuClock, LuDollarSign } from "react-icons/lu";
@@ -134,7 +136,7 @@ export default function CommissionsPage() {
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Commission Artwork</h1>
             <p className="text-xl text-gray-300 mb-6">
-              Bring your vision to life with our talented artists. From concept to creation, we'll help you create the perfect piece.
+              Bring your vision to life with our talented artists. From concept to creation, we&apos;ll help you create the perfect piece.
             </p>
             <div className="flex gap-4">
               <Badge variant="secondary" className="px-4 py-2">
