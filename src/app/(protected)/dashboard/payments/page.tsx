@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -18,56 +19,79 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { LuArrowUpRight, LuArrowDownRight, LuWallet } from "react-icons/lu";
+import { Skeleton } from "@/components/ui/skeleton";
+import { useToast } from "@/components/ui/use-toast";
 
-const transactions = [
-  {
-    id: "TRX001",
-    type: "Sale",
-    description: "Abstract Painting",
-    amount: 12999,
-    status: "Completed",
-    date: "2024-03-20",
-  },
-  {
-    id: "TRX002",
-    type: "Commission",
-    description: "Custom Portrait",
-    amount: 25000,
-    status: "Pending",
-    date: "2024-03-19",
-  },
-  {
-    id: "TRX003",
-    type: "Withdrawal",
-    description: "Bank Transfer",
-    amount: -35000,
-    status: "Completed",
-    date: "2024-03-18",
-  },
-];
+interface PaymentStats {
+  totalEarnings: number;
+  availableBalance: number;
+  pendingPayments: number;
+}
 
-const stats = [
-  {
-    title: "Total Earnings",
-    value: "₹1,25,000",
-    description: "Lifetime earnings",
-    icon: LuWallet,
-  },
-  {
-    title: "Available Balance",
-    value: "₹45,000",
-    description: "Ready to withdraw",
-    icon: LuArrowUpRight,
-  },
-  {
-    title: "Pending Payments",
-    value: "₹25,000",
-    description: "Processing",
-    icon: LuArrowDownRight,
-  },
-];
+interface Transaction {
+  id: string;
+  type: string;
+  description: string;
+  amount: number;
+  status: string;
+  date: string;
+}
+
+interface PaymentData {
+  stats: PaymentStats;
+  transactions: Transaction[];
+}
 
 export default function PaymentsPage() {
+  const [data, setData] = useState<PaymentData | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const { toast } = useToast();
+
+  useEffect(() => {
+    const fetchPaymentData = async () => {
+      try {
+        const response = await fetch("/api/dashboard/payments");
+        if (!response.ok) {
+          throw new Error("Failed to fetch payment data");
+        }
+        const data = await response.json();
+        setData(data);
+      } catch (error) {
+        console.error("Error fetching payment data:", error);
+        toast({
+          title: "Error",
+          description: "Failed to fetch payment data",
+          variant: "destructive",
+        });
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchPaymentData();
+  }, [toast]);
+
+  const stats = [
+    {
+      title: "Total Earnings",
+      value: data ? `₹${data.stats.totalEarnings.toLocaleString()}` : "₹0",
+      description: "Lifetime earnings",
+      icon: LuWallet,
+    },
+    {
+      title: "Available Balance",
+      value: data ? `₹${data.stats.availableBalance.toLocaleString()}` : "₹0",
+      description: "Ready to withdraw",
+      icon: LuArrowUpRight,
+    },
+    {
+      title: "Pending Payments",
+      value: data ? `₹${data.stats.pendingPayments.toLocaleString()}` : "₹0",
+      description: "Processing",
+      icon: LuArrowDownRight,
+    },
+  ];
+
   return (
     <div className="space-y-8">
       <div>
@@ -121,31 +145,51 @@ export default function PaymentsPage() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {transactions.map((transaction) => (
-                <TableRow key={transaction.id}>
-                  <TableCell className="font-medium">
-                    {transaction.id}
+              {isLoading ? (
+                Array.from({ length: 5 }).map((_, i) => (
+                  <TableRow key={i}>
+                    <TableCell><Skeleton className="h-4 w-[100px]" /></TableCell>
+                    <TableCell><Skeleton className="h-4 w-[60px]" /></TableCell>
+                    <TableCell><Skeleton className="h-4 w-[150px]" /></TableCell>
+                    <TableCell><Skeleton className="h-4 w-[80px]" /></TableCell>
+                    <TableCell><Skeleton className="h-4 w-[80px]" /></TableCell>
+                    <TableCell><Skeleton className="h-4 w-[100px]" /></TableCell>
+                  </TableRow>
+                ))
+              ) : data?.transactions.length === 0 ? (
+                <TableRow>
+                  <TableCell colSpan={6} className="text-center text-muted-foreground">
+                    No transactions found
                   </TableCell>
-                  <TableCell>{transaction.type}</TableCell>
-                  <TableCell>{transaction.description}</TableCell>
-                  <TableCell className={transaction.amount < 0 ? "text-red-600" : "text-green-600"}>
-                    ₹{Math.abs(transaction.amount)}
-                  </TableCell>
-                  <TableCell>
-                    <Badge
-                      variant="secondary"
-                      className={
-                        transaction.status === "Completed"
-                          ? "bg-green-100 text-green-800"
-                          : "bg-yellow-100 text-yellow-800"
-                      }
-                    >
-                      {transaction.status}
-                    </Badge>
-                  </TableCell>
-                  <TableCell>{transaction.date}</TableCell>
                 </TableRow>
-              ))}
+              ) : (
+                data?.transactions.map((transaction) => (
+                  <TableRow key={transaction.id}>
+                    <TableCell className="font-medium">
+                      {transaction.id}
+                    </TableCell>
+                    <TableCell>{transaction.type}</TableCell>
+                    <TableCell>{transaction.description}</TableCell>
+                    <TableCell className="text-green-600">
+                      ₹{transaction.amount.toLocaleString()}
+                    </TableCell>
+                    <TableCell>
+                      <Badge
+                        variant={
+                          transaction.status === "completed" ? "default" :
+                          transaction.status === "pending" ? "secondary" :
+                          "outline"
+                        }
+                      >
+                        {transaction.status}
+                      </Badge>
+                    </TableCell>
+                    <TableCell>
+                      {new Date(transaction.date).toLocaleDateString()}
+                    </TableCell>
+                  </TableRow>
+                ))
+              )}
             </TableBody>
           </Table>
         </CardContent>

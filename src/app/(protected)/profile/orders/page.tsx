@@ -54,7 +54,7 @@ const OrderCard = ({ order, isArtist }: { order: Order; isArtist: boolean }) => 
           <div>
             <CardTitle className="flex items-center gap-2">
               <span>Order #{order.id.slice(0, 8)}</span>
-              <Badge 
+              <Badge
                 className={`${statusColor[order.status as keyof typeof statusColor]} border-none`}
               >
                 {order.status.charAt(0).toUpperCase() + order.status.slice(1)}
@@ -129,7 +129,7 @@ const OrderCard = ({ order, isArtist }: { order: Order; isArtist: boolean }) => 
               </div>
             </div>
           </div>
-          
+
           {isExpanded && (
             <div className="mt-6 pt-6 border-t border-gray-100">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -206,11 +206,6 @@ const Orders = () => {
   const { toast } = useToast();
 
   useEffect(() => {
-    // Redirect artists to their dashboard
-    if (user?.role === "Artist") {
-      router.push("/dashboard/orders");
-      return;
-    }
 
     const fetchOrders = async () => {
       try {
@@ -246,23 +241,6 @@ const Orders = () => {
             <p className="text-muted-foreground mb-6">You need to be logged in to view your orders</p>
             <Button onClick={() => router.push("/login")}>
               Login
-            </Button>
-          </CardContent>
-        </Card>
-      </div>
-    );
-  }
-
-  // Show a redirect message for artists
-  if (user.role === "Artist") {
-    return (
-      <div className="container mx-auto px-4 py-8">
-        <Card>
-          <CardContent className="flex flex-col items-center justify-center py-12">
-            <h2 className="text-2xl font-semibold mb-4">Artist Dashboard</h2>
-            <p className="text-muted-foreground mb-6">Please visit your dashboard to view customer orders</p>
-            <Button onClick={() => router.push("/dashboard/orders")}>
-              Go to Dashboard
             </Button>
           </CardContent>
         </Card>
@@ -347,6 +325,19 @@ const Orders = () => {
           />
         ))}
       </div>
+      {user?.role === "Artist" && (
+        <div className="container mx-auto px-4 py-8">
+          <Card>
+            <CardContent className="flex flex-col items-center justify-center py-12">
+              <h2 className="text-2xl font-semibold mb-4">Artist Dashboard</h2>
+              <p className="text-muted-foreground mb-6">Please visit your dashboard to view customer orders</p>
+              <Button onClick={() => router.push("/dashboard/orders")}>
+                Go to Dashboard
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
+      )}
     </div>
   );
 };

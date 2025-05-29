@@ -12,21 +12,10 @@ export async function GET() {
     let orders;
     if (session.user.role === "Artist") {
       // Artists can only see orders for their own products
-      const artistProducts = await prisma.product.findMany({
-        where: {
-          artistId: session.user.id
-        },
-        select: {
-          id: true
-        }
-      });
-
-      const productIds = artistProducts.map(product => product.id);
-
       orders = await prisma.order.findMany({
         where: {
-          productId: {
-            in: productIds
+          product: {
+            artistId: session.user.id
           }
         },
         include: {
@@ -57,9 +46,6 @@ export async function GET() {
           createdAt: 'desc'
         }
       });
-
-      // Verify each order's product belongs to the artist
-      orders = orders.filter(order => order.product.artistId === session.user.id);
     } else {
       // Regular users can only see their own orders
       orders = await prisma.order.findMany({
@@ -94,22 +80,24 @@ export async function GET() {
           createdAt: 'desc'
         }
       });
-
-      // Additional verification that user only sees their own orders
-      orders = orders.filter(order => order.userId === session.user.id);
     }
 
     // Remove sensitive information before sending response
     const sanitizedOrders = orders.map(order => ({
-      ...order,
+      id: order.id,
+      createdAt: order.createdAt,
+      totalAmount: order.totalAmount,
+      status: order.status,
+      quantity: order.quantity,
       user: session.user.role === "Artist" ? {
         name: order.user.name,
         email: order.user.email
-      } : {
-        name: order.user.name
-      },
+      } : undefined,
       product: {
-        ...order.product,
+        id: order.product.id,
+        name: order.product.name,
+        price: order.product.price,
+        images: order.product.images,
         user: {
           name: order.product.user.name
         }

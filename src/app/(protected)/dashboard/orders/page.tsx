@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useCurrentUser } from "@/hooks/useCurrentUser";
 import { Heading } from "@/components/ui/heading";
 import { Separator } from "@/components/ui/separator";
@@ -21,6 +21,7 @@ interface Order {
   totalAmount: number;
   status: string;
   quantity: number;
+  paymentId: string;
   product: OrderProduct;
   user: {
     name: string;
@@ -34,29 +35,30 @@ export default function OrdersPage() {
   const { toast } = useToast();
   const user = useCurrentUser();
 
-  useEffect(() => {
-    const fetchOrders = async () => {
-      try {
-        const response = await fetch("/api/orders");
-        if (!response.ok) {
-          throw new Error("Failed to fetch orders");
-        }
-        const data = await response.json();
-        setOrders(data);
-      } catch (error) {
-        console.error("Error fetching orders:", error);
-        toast({
-          title: "Error",
-          description: "Failed to fetch orders",
-          variant: "destructive",
-        });
-      } finally {
-        setIsLoading(false);
+  const fetchOrders = useCallback(async () => {
+    try {
+      setIsLoading(true);
+      const response = await fetch("/api/orders");
+      if (!response.ok) {
+        throw new Error("Failed to fetch orders");
       }
-    };
-
-    fetchOrders();
+      const data = await response.json();
+      setOrders(data);
+    } catch (error) {
+      console.error("Error fetching orders:", error);
+      toast({
+        title: "Error",
+        description: "Failed to fetch orders",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   }, [toast]);
+
+  useEffect(() => {
+    fetchOrders();
+  }, [fetchOrders]);
 
   const formattedOrders = orders.map((order) => ({
     id: order.id,
@@ -68,6 +70,7 @@ export default function OrdersPage() {
     status: order.status,
     date: new Date(order.createdAt).toLocaleDateString(),
     image: order.product.images[0],
+    paymentId: order.paymentId || 'N/A'
   }));
 
   return (
@@ -85,6 +88,9 @@ export default function OrdersPage() {
           data={formattedOrders}
           searchKey="customer"
           isLoading={isLoading}
+          meta={{
+            refreshData: fetchOrders
+          }}
         />
       </div>
     </div>

@@ -1,57 +1,105 @@
 # ArtLink - Art Marketplace Platform
 
-ArtLink is a modern art marketplace platform built with Next.js, where artists can showcase and sell their artwork to art enthusiasts. The platform provides a seamless experience for both artists and buyers.
+ArtLink is a modern art marketplace platform built with Next.js, where artists can showcase and sell their artwork, accept commissions, and manage their business. The platform provides a seamless experience for artists, buyers, and art enthusiasts.
 
 ## Features
 
 ### For Artists
 - **Artist Dashboard**
-  - Profile management with verification status
-  - Artwork management (add, edit, delete)
-  - Sales tracking and analytics
-  - Order management
+  - Comprehensive analytics and statistics
+  - Revenue tracking and payment management
+  - Order management with status updates
+  - Commission request handling
+  - Real-time notifications
+  - Profile and portfolio management
+  - Artwork verification status
+
+- **Commission Management**
+  - Custom commission settings
+  - Price range configuration
+  - Availability management
+  - Commission request review
+  - Client communication
+  - Progress tracking
+  - Terms and conditions setup
+
+- **Payment System**
+  - Total earnings overview
+  - Available balance tracking
+  - Pending payment management
+  - Commission earnings
+  - Withdrawal functionality
+  - Transaction history
+
+- **Artwork Management**
+  - Multiple image upload (up to 5 images per artwork)
+  - Detailed specifications:
+    - Dimensions (width, height, depth)
+    - Medium and materials
+    - Category and style
+    - Price and stock management
+  - Image carousel for showcase
+  - Artwork status tracking
 
 ### For Buyers
-- **Browse Artworks**
-  - Search and filter functionality
+- **Browse & Purchase**
+  - Advanced search and filter functionality
   - Detailed artwork views
-  - Artist profiles
-- **Shopping Features**
-  - Shopping cart
-  - Wishlist
+  - Artist profiles and portfolios
+  - Secure checkout process
+  - Multiple payment methods
+
+- **Commission Requests**
+  - Submit custom artwork requests
+  - Specify requirements and preferences
+  - Set budgets and deadlines
+  - Track commission progress
+  - Direct communication with artists
+
+- **User Features**
+  - Order tracking and history
   - Multiple delivery addresses
-  - Order tracking
+  - Wishlist management
+  - Profile customization
+  - Payment method management
 
-### Product Management
-- Multiple image upload (up to 5 images per artwork)
-- Detailed artwork specifications:
-  - Dimensions (width, height, depth)
-  - Medium
-  - Category
-  - Style
-  - Price and stock management
-- Image carousel for artwork showcase
+### Admin Features
+- **User Management**
+  - User verification
+  - Role management
+  - Activity monitoring
+  - Profile verification
 
-### User Management
+- **Content Management**
+  - Artwork verification
+  - Commission oversight
+  - Order management
+  - Payment processing
+
+### Security & Authentication
 - Multiple authentication methods
-- Role-based access (Admin, Artist, General)
-- Profile verification system
-- Location-based features
+- Role-based access control (Admin, Artist, General)
+- Secure payment processing
+- Data encryption
+- AWS S3 secure image storage
 
 ## Tech Stack
 
-- **Frontend**
-  - Next.js 14 (App Router)
-  - TypeScript
-  - Tailwind CSS
-  - Shadcn UI Components
-  - React Hook Form
-  - Zod Validation
+### Frontend
+- Next.js 14 (App Router)
+- TypeScript
+- Tailwind CSS
+- Shadcn UI Components
+- React Hook Form
+- Zod Validation
+- Real-time updates
 
-- **Backend**
-  - PostgreSQL with Prisma ORM
-  - AWS S3 for image storage
-  - NextAuth.js for authentication
+### Backend
+- PostgreSQL with Prisma ORM
+- AWS S3 for image storage
+- NextAuth.js for authentication
+- RESTful API architecture
+- Secure payment integration
 
 ## Getting Started
 
@@ -129,15 +177,39 @@ npm run dev
 
 ```
 src/
-├── app/                 # Next.js app router pages
-├── components/         # Reusable components
-│   ├── forms/         # Form components
-│   ├── ui/            # UI components
-│   └── upload/        # Upload components
-├── lib/               # Utility functions and configurations
-├── hooks/             # Custom React hooks
-└── types/             # TypeScript type definitions
+├── app/                # Next.js app router pages
+│   ├── api/           # API routes
+│   ├── (auth)/        # Authentication pages
+│   └── (protected)/   # Protected routes
+├── components/        # Reusable components
+│   ├── dashboard/    # Dashboard components
+│   ├── forms/        # Form components
+│   ├── ui/           # UI components
+│   └── upload/       # Upload components
+├── lib/              # Utility functions
+├── hooks/            # Custom React hooks
+├── context/         # React context providers
+├── schema/          # Data validation schemas
+└── types/           # TypeScript definitions
 ```
+
+## API Routes
+
+### User Routes
+- `/api/auth/*` - Authentication endpoints
+- `/api/orders` - Order management
+- `/api/products` - Product management
+- `/api/commissions` - Commission system
+
+### Artist Routes
+- `/api/dashboard/*` - Dashboard data
+- `/api/artist/*` - Artist-specific features
+- `/api/commission-settings` - Commission configuration
+
+### Admin Routes
+- `/api/admin/users` - User management
+- `/api/admin/orders` - Order oversight
+- `/api/admin/artworks` - Artwork verification
 
 ## Contributing
 
@@ -157,3 +229,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [Prisma](https://www.prisma.io/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Shadcn UI](https://ui.shadcn.com/)
+- [NextAuth.js](https://next-auth.js.org/)
+- [AWS S3](https://aws.amazon.com/s3/)
+- [RazorPay](hhtps://razorpay.in)
